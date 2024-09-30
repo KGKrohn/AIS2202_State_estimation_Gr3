@@ -1,0 +1,23 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "MSVC",
+	"compiler-id" : "MSVC",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/state_estimation",
+	"dir-cur-src" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3/state_estimation",
+	"dir-top-bld" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug",
+	"dir-top-src" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"vcpkg_installed\\x64-windows\\include",
+		"D:\\AIS2202_code\\AIS2202_State_estimation_Gr3\\estimation\\include",
+		"vcpkg_installed\\x64-windows\\include\\eigen3"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/state_estimation/CMakeFiles/state_estimation.dir"
+}

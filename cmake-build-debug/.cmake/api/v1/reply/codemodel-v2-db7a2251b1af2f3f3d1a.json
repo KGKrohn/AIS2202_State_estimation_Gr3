@@ -1,0 +1,126 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "estimation",
+					"jsonFile" : "directory-estimation-Debug-2ee5f498e1709d12d21f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "estimation",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "parameter_estimation",
+					"jsonFile" : "directory-parameter_estimation-Debug-fe6c141b6d762b70d5b8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "parameter_estimation",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "state_estimation",
+					"jsonFile" : "directory-state_estimation-Debug-44ed785ca3dd1ebe5311.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "state_estimation",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "AIS4104-assignments",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "estimation::@b5e3eea9e13ce9683a8a",
+					"jsonFile" : "target-estimation-Debug-97ce53d8e018fa88f479.json",
+					"name" : "estimation",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "parameter_estimation::@cea4ae22784e3a6207fe",
+					"jsonFile" : "target-parameter_estimation-Debug-9ec449c8f55d6895e00d.json",
+					"name" : "parameter_estimation",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "state_estimation::@455b1d63480ac2b5e590",
+					"jsonFile" : "target-state_estimation-Debug-0e7959d2afe9c31bc391.json",
+					"name" : "state_estimation",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug",
+		"source" : "D:/AIS2202_code/AIS2202_State_estimation_Gr3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
