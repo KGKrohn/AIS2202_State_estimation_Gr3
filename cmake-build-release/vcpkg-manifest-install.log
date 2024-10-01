@@ -2,7 +2,7 @@ waiting to take filesystem lock on C:\vcpkg\.vcpkg-root...
 Detecting compiler hash for triplet x64-windows...
 Compiler found: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/cl.exe
 All requested packages are currently installed.
-Total install time: 1.8 us
+Total install time: 19.4 us
 eigen3 provides CMake targets:
 
   # this is heuristically generated, and may not be correct

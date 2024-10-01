@@ -69,6 +69,101 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # =============================================================================
 
 # =============================================================================
+# Object build statements for EXECUTABLE target Data_parsing
+
+
+#############################################
+# Order-only phony target for Data_parsing
+
+build cmake_object_order_depends_target_Data_parsing: phony || .
+
+build Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.ddi: CXX_SCAN__Data_parsing_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\main.cpp || cmake_object_order_depends_target_Data_parsing
+  DEP_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\Data -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJ_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.ddi.i
+
+build Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj: CXX_COMPILER__Data_parsing_scanned_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\main.cpp | Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.modmap || cmake_object_order_depends_target_Data_parsing Data_parsing\CMakeFiles\Data_parsing.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\Data -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJECT_DIR = Data_parsing\CMakeFiles\Data_parsing.dir
+  OBJECT_FILE_DIR = Data_parsing\CMakeFiles\Data_parsing.dir
+  TARGET_COMPILE_PDB = Data_parsing\CMakeFiles\Data_parsing.dir\
+  TARGET_PDB = Data_parsing\Data_parsing.pdb
+  dyndep = Data_parsing/CMakeFiles/Data_parsing.dir/CXX.dd
+
+build Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.ddi: CXX_SCAN__Data_parsing_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp || cmake_object_order_depends_target_Data_parsing
+  DEP_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\Data -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJ_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.ddi.i
+
+build Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj: CXX_COMPILER__Data_parsing_scanned_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp | Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.modmap || cmake_object_order_depends_target_Data_parsing Data_parsing\CMakeFiles\Data_parsing.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\Data -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJECT_DIR = Data_parsing\CMakeFiles\Data_parsing.dir
+  OBJECT_FILE_DIR = Data_parsing\CMakeFiles\Data_parsing.dir
+  TARGET_COMPILE_PDB = Data_parsing\CMakeFiles\Data_parsing.dir\
+  TARGET_PDB = Data_parsing\Data_parsing.pdb
+  dyndep = Data_parsing/CMakeFiles/Data_parsing.dir/CXX.dd
+
+build Data_parsing\CMakeFiles\Data_parsing.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\Data_parsing\CMakeFiles\Data_parsing.dir\CXXModules.json Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.modmap Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.modmap: CXX_DYNDEP__Data_parsing_Debug Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj.ddi Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\Data_parsing\CMakeFiles\Data_parsing.dir\CXXDependInfo.json
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Data_parsing
+
+
+#############################################
+# Link the executable Data_parsing\Data_parsing.exe
+
+build Data_parsing\Data_parsing.exe: CXX_EXECUTABLE_LINKER__Data_parsing_Debug Data_parsing\CMakeFiles\Data_parsing.dir\main.cpp.obj Data_parsing\CMakeFiles\Data_parsing.dir\DataStore.cpp.obj
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = Data_parsing\CMakeFiles\Data_parsing.dir
+  POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\Data_parsing && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/Data_parsing/Data_parsing.exe -installedDir D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = Data_parsing\CMakeFiles\Data_parsing.dir\
+  TARGET_FILE = Data_parsing\Data_parsing.exe
+  TARGET_IMPLIB = Data_parsing\Data_parsing.lib
+  TARGET_PDB = Data_parsing\Data_parsing.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build Data_parsing\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\Data_parsing && "C:\Program Files\JetBrains\CLion 2024.2.1\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build Data_parsing\edit_cache: phony Data_parsing\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build Data_parsing\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\Data_parsing && "C:\Program Files\JetBrains\CLion 2024.2.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SD:\AIS2202_code\AIS2202_State_estimation_Gr3 -BD:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build Data_parsing\rebuild_cache: phony Data_parsing\CMakeFiles\rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# D:/AIS2202_code/AIS2202_State_estimation_Gr3/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
 # Object build statements for STATIC_LIBRARY target estimation
 
 
@@ -95,7 +190,25 @@ build estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj: CXX_COMPILER__
   TARGET_PDB = estimation\estimation.pdb
   dyndep = estimation/CMakeFiles/estimation.dir/CXX.dd
 
-build estimation\CMakeFiles\estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\estimation\CMakeFiles\estimation.dir\CXXModules.json estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj.modmap: CXX_DYNDEP__estimation_Debug estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\estimation\CMakeFiles\estimation.dir\CXXDependInfo.json
+build estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi: CXX_SCAN__estimation_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp || cmake_object_order_depends_target_estimation
+  DEP_FILE = estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\include -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJ_FILE = estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi.i
+
+build estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj: CXX_COMPILER__estimation_scanned_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp | estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap || cmake_object_order_depends_target_estimation estimation\CMakeFiles\estimation.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\include -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJECT_DIR = estimation\CMakeFiles\estimation.dir
+  OBJECT_FILE_DIR = estimation\CMakeFiles\estimation.dir\__\Data_parsing
+  TARGET_COMPILE_PDB = estimation\CMakeFiles\estimation.dir\estimation.pdb
+  TARGET_PDB = estimation\estimation.pdb
+  dyndep = estimation/CMakeFiles/estimation.dir/CXX.dd
+
+build estimation\CMakeFiles\estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\estimation\CMakeFiles\estimation.dir\CXXModules.json estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj.modmap estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap: CXX_DYNDEP__estimation_Debug estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj.ddi estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\estimation\CMakeFiles\estimation.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -105,7 +218,7 @@ build estimation\CMakeFiles\estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_Sta
 #############################################
 # Link the static library estimation\estimation.lib
 
-build estimation\estimation.lib: CXX_STATIC_LIBRARY_LINKER__estimation_Debug estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj
+build estimation\estimation.lib: CXX_STATIC_LIBRARY_LINKER__estimation_Debug estimation\CMakeFiles\estimation.dir\kalman_filter.cpp.obj estimation\CMakeFiles\estimation.dir\__\Data_parsing\DataStore.cpp.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = estimation\CMakeFiles\estimation.dir
@@ -170,7 +283,25 @@ build parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj: CXX
   TARGET_PDB = parameter_estimation\parameter_estimation.pdb
   dyndep = parameter_estimation/CMakeFiles/parameter_estimation.dir/CXX.dd
 
-build parameter_estimation\CMakeFiles\parameter_estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\parameter_estimation\CMakeFiles\parameter_estimation.dir\CXXModules.json parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj.modmap: CXX_DYNDEP__parameter_estimation_Debug parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\parameter_estimation\CMakeFiles\parameter_estimation.dir\CXXDependInfo.json
+build parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi: CXX_SCAN__parameter_estimation_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp || cmake_object_order_depends_target_parameter_estimation
+  DEP_FILE = parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJ_FILE = parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi.i
+
+build parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj: CXX_COMPILER__parameter_estimation_scanned_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp | parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap || cmake_object_order_depends_target_parameter_estimation parameter_estimation\CMakeFiles\parameter_estimation.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJECT_DIR = parameter_estimation\CMakeFiles\parameter_estimation.dir
+  OBJECT_FILE_DIR = parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing
+  TARGET_COMPILE_PDB = parameter_estimation\CMakeFiles\parameter_estimation.dir\
+  TARGET_PDB = parameter_estimation\parameter_estimation.pdb
+  dyndep = parameter_estimation/CMakeFiles/parameter_estimation.dir/CXX.dd
+
+build parameter_estimation\CMakeFiles\parameter_estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\parameter_estimation\CMakeFiles\parameter_estimation.dir\CXXModules.json parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj.modmap parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap: CXX_DYNDEP__parameter_estimation_Debug parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj.ddi parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\parameter_estimation\CMakeFiles\parameter_estimation.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -180,7 +311,7 @@ build parameter_estimation\CMakeFiles\parameter_estimation.dir\CXX.dd | D$:\AIS2
 #############################################
 # Link the executable parameter_estimation\parameter_estimation.exe
 
-build parameter_estimation\parameter_estimation.exe: CXX_EXECUTABLE_LINKER__parameter_estimation_Debug parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj
+build parameter_estimation\parameter_estimation.exe: CXX_EXECUTABLE_LINKER__parameter_estimation_Debug parameter_estimation\CMakeFiles\parameter_estimation.dir\main.cpp.obj parameter_estimation\CMakeFiles\parameter_estimation.dir\__\Data_parsing\DataStore.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -247,7 +378,25 @@ build state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj: CXX_COMPILE
   TARGET_PDB = state_estimation\state_estimation.pdb
   dyndep = state_estimation/CMakeFiles/state_estimation.dir/CXX.dd
 
-build state_estimation\CMakeFiles\state_estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\state_estimation\CMakeFiles\state_estimation.dir\CXXModules.json state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj.modmap: CXX_DYNDEP__state_estimation_Debug state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\state_estimation\CMakeFiles\state_estimation.dir\CXXDependInfo.json
+build state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi: CXX_SCAN__state_estimation_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp || cmake_object_order_depends_target_state_estimation
+  DEP_FILE = state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\include -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJ_FILE = state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi.i
+
+build state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj: CXX_COMPILER__state_estimation_scanned_Debug D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\DataStore.cpp | state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap || cmake_object_order_depends_target_state_estimation state_estimation\CMakeFiles\state_estimation.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include -ID:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\include -external:ID:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\vcpkg_installed\x64-windows\include\eigen3 -external:W0
+  OBJECT_DIR = state_estimation\CMakeFiles\state_estimation.dir
+  OBJECT_FILE_DIR = state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing
+  TARGET_COMPILE_PDB = state_estimation\CMakeFiles\state_estimation.dir\
+  TARGET_PDB = state_estimation\state_estimation.pdb
+  dyndep = state_estimation/CMakeFiles/state_estimation.dir/CXX.dd
+
+build state_estimation\CMakeFiles\state_estimation.dir\CXX.dd | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\state_estimation\CMakeFiles\state_estimation.dir\CXXModules.json state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj.modmap state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.modmap: CXX_DYNDEP__state_estimation_Debug state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj.ddi state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj.ddi | D$:\AIS2202_code\AIS2202_State_estimation_Gr3\cmake-build-debug\state_estimation\CMakeFiles\state_estimation.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -257,7 +406,7 @@ build state_estimation\CMakeFiles\state_estimation.dir\CXX.dd | D$:\AIS2202_code
 #############################################
 # Link the executable state_estimation\state_estimation.exe
 
-build state_estimation\state_estimation.exe: CXX_EXECUTABLE_LINKER__state_estimation_Debug state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj | estimation\estimation.lib || estimation\estimation.lib
+build state_estimation\state_estimation.exe: CXX_EXECUTABLE_LINKER__state_estimation_Debug state_estimation\CMakeFiles\state_estimation.dir\main.cpp.obj state_estimation\CMakeFiles\state_estimation.dir\__\Data_parsing\DataStore.cpp.obj | estimation\estimation.lib || estimation\estimation.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = estimation\estimation.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -295,6 +444,10 @@ build state_estimation\rebuild_cache: phony state_estimation\CMakeFiles\rebuild_
 # =============================================================================
 # Target aliases.
 
+build Data_parsing: phony Data_parsing\Data_parsing.exe
+
+build Data_parsing.exe: phony Data_parsing\Data_parsing.exe
+
 build estimation: phony estimation\estimation.lib
 
 build estimation.lib: phony estimation\estimation.lib
@@ -315,7 +468,14 @@ build state_estimation.exe: phony state_estimation\state_estimation.exe
 #############################################
 # Folder: D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug
 
-build all: phony estimation\all parameter_estimation\all state_estimation\all
+build all: phony Data_parsing\all estimation\all parameter_estimation\all state_estimation\all
+
+# =============================================================================
+
+#############################################
+# Folder: D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/Data_parsing
+
+build Data_parsing\all: phony Data_parsing\Data_parsing.exe
 
 # =============================================================================
 
@@ -345,14 +505,14 @@ build state_estimation\all: phony state_estimation\state_estimation.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake C$:\vcpkg\scripts\buildsystems\vcpkg.cmake CMakeCache.txt CMakeFiles\3.29.6\CMakeCCompiler.cmake CMakeFiles\3.29.6\CMakeCXXCompiler.cmake CMakeFiles\3.29.6\CMakeRCCompiler.cmake CMakeFiles\3.29.6\CMakeSystem.cmake D$:\AIS2202_code\AIS2202_State_estimation_Gr3\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\parameter_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\state_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\vcpkg.json vcpkg_installed\x64-windows\share\eigen3\Eigen3Config.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3ConfigVersion.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3Targets.cmake
+build build.ninja: RERUN_CMAKE | C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake C$:\vcpkg\scripts\buildsystems\vcpkg.cmake CMakeCache.txt CMakeFiles\3.29.6\CMakeCCompiler.cmake CMakeFiles\3.29.6\CMakeCXXCompiler.cmake CMakeFiles\3.29.6\CMakeRCCompiler.cmake CMakeFiles\3.29.6\CMakeSystem.cmake D$:\AIS2202_code\AIS2202_State_estimation_Gr3\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\parameter_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\state_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\vcpkg.json vcpkg_installed\x64-windows\share\eigen3\Eigen3Config.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3ConfigVersion.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3Targets.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake C$:\vcpkg\scripts\buildsystems\vcpkg.cmake CMakeCache.txt CMakeFiles\3.29.6\CMakeCCompiler.cmake CMakeFiles\3.29.6\CMakeCXXCompiler.cmake CMakeFiles\3.29.6\CMakeRCCompiler.cmake CMakeFiles\3.29.6\CMakeSystem.cmake D$:\AIS2202_code\AIS2202_State_estimation_Gr3\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\parameter_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\state_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\vcpkg.json vcpkg_installed\x64-windows\share\eigen3\Eigen3Config.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3ConfigVersion.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3Targets.cmake: phony
+build C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2024.2.1\bin\cmake\win\x64\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake C$:\vcpkg\scripts\buildsystems\vcpkg.cmake CMakeCache.txt CMakeFiles\3.29.6\CMakeCCompiler.cmake CMakeFiles\3.29.6\CMakeCXXCompiler.cmake CMakeFiles\3.29.6\CMakeRCCompiler.cmake CMakeFiles\3.29.6\CMakeSystem.cmake D$:\AIS2202_code\AIS2202_State_estimation_Gr3\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\Data_parsing\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\parameter_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\state_estimation\CMakeLists.txt D$:\AIS2202_code\AIS2202_State_estimation_Gr3\vcpkg.json vcpkg_installed\x64-windows\share\eigen3\Eigen3Config.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3ConfigVersion.cmake vcpkg_installed\x64-windows\share\eigen3\Eigen3Targets.cmake: phony
 
 
 #############################################

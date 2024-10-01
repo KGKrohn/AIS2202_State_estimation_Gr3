@@ -34,6 +34,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/Data_parsing/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("D:/AIS2202_code/AIS2202_State_estimation_Gr3/cmake-build-debug/estimation/cmake_install.cmake")
 endif()
 
