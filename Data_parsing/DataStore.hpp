@@ -59,6 +59,22 @@ public:
         return result;
     }
 
+    std::vector<std::string> getColumnNamesVector() {
+        return columnNames_;
+    }
+
+    std::string getColumnName(int index) {
+        return columnNames_[index];
+    }
+
+    std::vector<float> getColumn(int index) {
+        return data_[index];
+    }
+
+    std::vector<std::vector<float>> getData() {
+        return data_;
+    }
+
 
 
     ~DataStore() {
