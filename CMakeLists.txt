@@ -8,5 +8,4 @@ add_subdirectory(estimation)
 add_subdirectory(parameter_estimation)
 add_subdirectory(state_estimation)
 
-
 add_dependencies(state_estimation estimation)
