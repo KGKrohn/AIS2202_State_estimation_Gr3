@@ -15,8 +15,10 @@
 
 class DataStore {
 public:
-    DataStore(std::string &csvFileName) : csvFileName_(csvFileName) {
-        std::ifstream file(csvFileName);
+    DataStore(std::string csvFileName) : csvFileName_(csvFileName) {
+        std::ifstream file;
+        file.open(csvFileName);
+
         if (!file.is_open()) {
             std::cerr << "Could not open the file!" << std::endl;
         }
