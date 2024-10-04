@@ -16,41 +16,10 @@
 class DataStore {
 public:
     DataStore(std::string csvFileName) : csvFileName_(csvFileName) {
-        std::ifstream file;
-        file.open(csvFileName);
+        rapidcsv::Document data(csvFileName_);
+        this->data_ = data;
 
-        if (!file.is_open()) {
-            std::cerr << "Could not open the file!" << std::endl;
-        }
-
-        std::string line;
-        std::vector<std::string> columnNames;
-        bool isFirstRow = true;
-
-        while (std::getline(file, line)) {
-            std::vector<std::string> row = parseCSVLine(line);
-
-            if (isFirstRow) {
-                columnNames_ = row;
-                isFirstRow = false;
-            } else {
-            std::vector<float> floatRow;
-            for (const std::string& value : row) {
-                try {
-                    floatRow.push_back(std::stof(value));
-                } catch (const std::invalid_argument& e) {
-                    std::cerr << "Invalid data: Unable to convert '" << value << "' to float." << std::endl;
-                } catch (const std::out_of_range& e) {
-                    std::cerr << "Out of range: Value '" << value << "' is too large to convert to float." << std::endl;
-                }
-            }
-            data_.push_back(floatRow);
-        }
-    }
-
-    file.close();
 }
-
     std::vector<std::string> parseCSVLine(const std::string& line) {
         std::vector<std::string> result;
         std::stringstream s_stream(line);
@@ -69,11 +38,17 @@ public:
         return columnNames_[index];
     }
 
-    std::vector<float> getColumn(int index) {
-        return data_[index];
+    std::vector<float> getColumnByIdx(int index) {
+        return data_.GetColumn<float>(index);
     }
 
-    std::vector<std::vector<float>> getData() {
+    std::vector<float> getColumnByName(const std::string &name) {
+        return data_.GetColumn<float>(name);
+    }
+
+
+
+    rapidcsv::Document getData() {
         return data_;
     }
 
@@ -86,7 +61,7 @@ public:
 private:
     std::string csvFileName_ = {};
     std::vector<std::string> columnNames_ = {};
-    std::vector<std::vector<float>> data_ = {};
+    rapidcsv::Document data_;
 };
 
 
