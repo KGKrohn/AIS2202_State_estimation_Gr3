@@ -15,11 +15,13 @@ class CalibrationFTS {
 public:
     explicit CalibrationFTS(const std::string &csvFile) {
         rapidcsv::Document extraction(csvFile);
-        this->variableNames_ = extraction.GetRow<std::string>(0);
-        extraction.RemoveRow(0);
-        for (int count = 0; count < extraction.GetColumnCount(); count++) {
+
+        this->variableNames_ = extraction.GetColumnNames();
+
+        for (int count = 0; count < variableNames_.size(); count++) {
             this->data_.push_back(extraction.GetColumn<float>(count));
         }
+
         this->fx_ = data_[getVariableNameIndex("fx")];
         this->fy_ = data_[getVariableNameIndex("fy")];
         this->fz_ = data_[getVariableNameIndex("fz")];
@@ -37,24 +39,20 @@ public:
         this->r13_ = data_[getVariableNameIndex("r13")];
         this->r21_ = data_[getVariableNameIndex("r21")];
         this->r22_ = data_[getVariableNameIndex("r22")];
-        this->r23_ = data_[getVariableNameIndex("23")];
-        this->r31_ = data_[getVariableNameIndex("31")];
+        this->r23_ = data_[getVariableNameIndex("r23")];
+        this->r31_ = data_[getVariableNameIndex("r31")];
         this->r32_ = data_[getVariableNameIndex("r32")];
-        this->r33_ = data_[getVariableNameIndex("33")];
+        this->r33_ = data_[getVariableNameIndex("r33")];
     }
 
+
     int getVariableNameIndex(const std::string &name) {
-        try{
-            for (int i = 0; variableNames_.size() > i; i++) {
-                if (name == variableNames_[i]){
-                    return i;
-                }
+        for (int i = 0; i < variableNames_.size(); i++) {
+            if (name == variableNames_[i]) {
+                return i;
             }
-            throw("Did not return a value");
         }
-        catch(std::string &message) {
-            std::cout << message << std::endl;
-        }
+        throw std::runtime_error("Variable name not found: " + name);
     }
 
     std::vector<float> getForceVector(const int &index) {
@@ -76,7 +74,7 @@ public:
     std::vector<std::vector<float>> getTorqueVectorColumn() {
         std::vector<std::vector<float>> column = {};
         for (int i = 0; i < tx_.size(); i++) {
-            column.push_back(getForceVector(i));
+            column.push_back(getTorqueVector(i));
         }
         return column;
     }
@@ -88,7 +86,7 @@ public:
     std::vector<std::vector<float>> getAccVectorColumn() {
         std::vector<std::vector<float>> column = {};
         for (int i = 0; i < ax_.size(); i++) {
-            column.push_back(getForceVector(i));
+            column.push_back(getAccVector(i));
         }
         return column;
     }
@@ -100,7 +98,7 @@ public:
     std::vector<std::vector<float>> getGVectorColumn() {
         std::vector<std::vector<float>> column = {};
         for (int i = 0; i < gx_.size(); i++) {
-            column.push_back(getForceVector(i));
+            column.push_back(getGVector(i));
         }
         return column;
     }
@@ -112,7 +110,7 @@ public:
     std::vector<std::vector<float>> getR1VectorColumn() {
         std::vector<std::vector<float>> column = {};
         for (int i = 0; i < r11_.size(); i++) {
-            column.push_back(getForceVector(i));
+            column.push_back(getR1Vector(i));
         }
         return column;
     }
@@ -124,7 +122,7 @@ public:
     std::vector<std::vector<float>> getR2VectorColumn() {
         std::vector<std::vector<float>> column = {};
         for (int i = 0; i < r21_.size(); i++) {
-            column.push_back(getForceVector(i));
+            column.push_back(getR2Vector(i));
         }
         return column;
     }
@@ -136,7 +134,7 @@ public:
     std::vector<std::vector<float>> getR3VectorColumn() {
         std::vector<std::vector<float>> column = {};
         for (int i = 0; i < r31_.size(); i++) {
-            column.push_back(getForceVector(i));
+            column.push_back(getR3Vector(i));
         }
         return column;
     }
