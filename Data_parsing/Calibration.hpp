@@ -141,6 +141,14 @@ public:
         return column;
     }
 
+    Eigen::Matrix3f getRmatrix(const int &index) {
+        Eigen::Matrix3f  m;
+        m << r11_[index], r12_[index], r13_[index],
+            r21_[index], r22_[index], r23_[index],
+            r31_[index], r32_[index], r33_[index];
+        return m;
+    }
+
 private:
     std::vector<float> fx_;
     std::vector<float> fy_;
@@ -165,6 +173,5 @@ private:
     std::vector<float> r33_;
     std::vector<std::string> variableNames_;
     std::vector<std::vector<float>> data_;
-
 };
 #endif //AIS4104_ASSIGNMENTS_CALIBRATION_HPP
