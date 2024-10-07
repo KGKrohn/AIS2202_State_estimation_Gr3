@@ -147,6 +147,14 @@ public:
         return m;
     }
 
+    std::vector<Eigen::Matrix3f> getRMatrixColumn() {
+        std::vector<Eigen::Matrix3f> column = {};
+        for (int i = 0; i < r31_.size(); i++) {
+            column.push_back(getRmatrix(i));
+        }
+        return column;
+    }
+
 private:
     std::vector<float> fx_;
     std::vector<float> fy_;
