@@ -11,14 +11,12 @@ public:
 
     void update_Matrix(std::vector<std::vector<float>> f,
                        std::vector<std::vector<float>> g,
-                       std::vector<std::vector<float>> t,
-                       std::vector<std::vector<float>> r)
+                       std::vector<std::vector<float>> t)
     {
         F = conv_vector_to_72x1_matrix(f);
         G = conv_vector_to_72x1_matrix(g);
         T = conv_vector_to_72x1_matrix(t);
         A = define_A(g);
-        R = conv_vector_to_72x3_matrix(r);
     }
 
     static Eigen::MatrixXd conv_vector_to_72x1_matrix(std::vector<std::vector<float>> vector)
