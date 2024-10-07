@@ -155,6 +155,16 @@ public:
         return column;
     }
 
+    std::vector<std::vector<float>> getRVectors() {
+        std::vector<std::vector<float>> newVector = {};
+        for (int i = 0; i < r31_.size(); i++) {
+            newVector.push_back(getR1Vector(i));
+            newVector.push_back(getR2Vector(i));
+            newVector.push_back(getR3Vector(i));
+        }
+        return newVector;
+    }
+
 private:
     std::vector<float> fx_;
     std::vector<float> fy_;
