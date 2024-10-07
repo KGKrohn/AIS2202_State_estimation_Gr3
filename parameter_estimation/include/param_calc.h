@@ -63,12 +63,15 @@ public:
             A(i*3+2 , 1) = gx;
             A(i*3+2 , 2) = 0;
         }
-
         return A;
+    }
+    void update_R(const Eigen::Matrix3f& R_matrix)
+    {
+        R = R_matrix.cast<double>();
     }
 
 
-    [[nodiscard]] float m_calc()
+    float m_calc()
     {
         auto v1 =(G.transpose()*F);
         auto v2 = (G.transpose()*G);
@@ -84,6 +87,20 @@ public:
         return r;
     }
 
+    [[nodiscard]] Eigen::MatrixXd  fg_calc()
+    {
+        Eigen::MatrixXd f(2,1);
+        Eigen::Vector3d gi(3,1);
+        gi << 0, 0, -9.81;
+        Eigen::Vector3d r = r_calc();
+        Eigen::Vector3d u2;
+        Eigen::Vector3d U2;
+        u2 = R.transpose()*gi;
+        U2 = r.cross(u2);
+        f << m_calc()*R.transpose()*gi , m_calc()*U2;
+
+        return f;
+    }
 
 
 
