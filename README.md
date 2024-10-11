@@ -5,7 +5,7 @@ The task is to implement the (1) parameter estimation and (2) state estimation t
 
 ## Parameter estimation
 For parameter estimation of the sensor and end-effector tool, the following must be estimated by using the dataset and implementing the techniques from paper 1:
-1. Sensor bias.
+1. Sensor f_bias.
 2. Mass of the tool.
 3. Mass center of the tool.
 

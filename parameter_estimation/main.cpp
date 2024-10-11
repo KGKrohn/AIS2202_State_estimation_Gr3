@@ -18,8 +18,12 @@ int main()
     calc.update_Matrix(f=f, g=g, t=t);
     calc.update_R(r1,r2,r3);
 
-    std::cout <<"m: "<< calc.m_calc() << std::endl;
-    std::cout <<"r: "<< calc.r_calc() << std::endl;
-    std::cout <<"f: "<< calc.fg_calc() << std::endl;
+    std::cout <<"Torque bias: "<< calc.t_bias_vector() << std::endl;
+    //std::cout <<"Mass: "<< calc.m_calc() << std::endl;
+    //std::cout <<"Center of mass distance : "<< calc.r_calc() << std::endl;
+    //std::cout <<"Force_calibration bias: "<< calc.fg_calc() << std::endl;
+
+
+
     return 0;
 }
