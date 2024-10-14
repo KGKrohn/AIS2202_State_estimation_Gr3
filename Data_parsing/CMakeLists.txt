@@ -4,7 +4,8 @@ find_path(RAPIDCSV_INCLUDE_DIRS "rapidcsv.h")
 add_executable(Data_parsing main.cpp
         DataStore.cpp
         DataStore.hpp
-        Calibration.hpp)
+        Calibration.hpp
+        Vibration_Acc.hpp)
 
 target_link_libraries(Data_parsing PUBLIC Eigen3::Eigen)
 target_include_directories(Data_parsing PRIVATE ${RAPIDCSV_INCLUDE_DIRS})
