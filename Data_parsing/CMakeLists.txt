@@ -2,7 +2,6 @@ find_package(Eigen3 CONFIG REQUIRED)
 find_path(RAPIDCSV_INCLUDE_DIRS "rapidcsv.h")
 
 add_executable(Data_parsing main.cpp
-        DataStore.cpp
         DataStore.hpp
         Calibration.hpp
         Vibration_Acc.hpp)
