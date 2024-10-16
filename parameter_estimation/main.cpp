@@ -19,9 +19,10 @@ int main()
     calc.update_R(r1,r2,r3);
 
     std::cout <<"Torque bias: "<< calc.t_bias_vector() << std::endl;
-    //std::cout <<"Mass: "<< calc.m_calc() << std::endl;
-    //std::cout <<"Center of mass distance : "<< calc.r_calc() << std::endl;
-    //std::cout <<"Force_calibration bias: "<< calc.fg_calc() << std::endl;
+    std::cout <<"Force bias: "<< calc.f_bias_vector() << std::endl;
+    std::cout <<"Mass: "<< calc.m_calc() << std::endl;
+    std::cout <<"Center of mass distance  without bias: "<< calc.r_calc() << std::endl;
+    std::cout <<"Force_calibration without bias: "<< calc.fg_calc() << std::endl;
 
 
 

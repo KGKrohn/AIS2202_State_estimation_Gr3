@@ -8,7 +8,7 @@ class parameter_calculation
 {
 public:
 
-    parameter_calculation():F(72,1),G(72,1),R(72,3),T(72,1), A(72,3),F_cal(72,3){}
+    parameter_calculation():F(72,1),G(72,1),R(72,3),T(72,1), A(72,3),F_cal(72,3),Tb(1,3){}
 
     void update_Matrix(std::vector<std::vector<float>> f,
                        std::vector<std::vector<float>> g,
@@ -18,7 +18,8 @@ public:
         G = conv_vector_to_72x1_matrix(g);
         T = conv_vector_to_72x1_matrix(t);
         A = define_A(g);
-        F_cal = f_calibration(f = f, g = g);
+        F_cal = calc_fb_matrix();
+        Tb = T - t_bias_vector();
     }
 
     static Eigen::MatrixXd conv_vector_to_72x1_matrix(std::vector<std::vector<float>> vector)
@@ -32,6 +33,7 @@ public:
         }
         return Matrix;
     }
+
 
     std::vector<std::vector<float>> f_bias(std::vector<std::vector<float>> f,
                                            std::vector<std::vector<float>> g) // calculate the bias in the force sensor.
@@ -53,18 +55,77 @@ public:
                 }
             }
         }
+
         return V;
+    }
+
+    Eigen::MatrixXd f_bias_vector() // calculate the bias in the force sensor.
+    {
+        Eigen::MatrixXd Fb(3,1);
+        std::vector<float> fb_x;
+        std::vector<float> fb_y;
+        std::vector<float> fb_z;
+        fb_x = calc_fb_values(0);
+        fb_y = calc_fb_values(1);
+        fb_z = calc_fb_values(2);
+        double fb_x_mean = std::accumulate(fb_x.begin(), fb_x.end(), 0.0) / fb_x.size();
+        double fb_y_mean = std::accumulate(fb_y.begin(), fb_y.end(), 0.0) / fb_y.size();
+        double fb_z_mean = std::accumulate(fb_z.begin(), fb_z.end(), 0.0) / fb_z.size();
+        Fb << fb_x_mean, fb_y_mean, fb_z_mean;
+        return Fb;
+    }
+
+    Eigen::MatrixXd calc_fb_matrix() // calculate the bias in the force sensor.
+    {
+        Eigen::MatrixXd Fb_cal(72,1);
+        Fb_cal = F;
+        for (int i = 0; i < 23; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if((G(i*3 + j)> 9) and (G(i*3 + j+3) < -9))
+                {
+                    float fb_bias = ((F(i*3 + j) + F(i*3 + j+3))/2.0);
+                    Fb_cal(i*3 + j) = Fb_cal(i*3 + j)  - fb_bias;
+                    Fb_cal(i*3 + j+3) =Fb_cal(i*3 + j+3) + fb_bias;
+                }
+                if((G(i*3+j) < -9) and (G(i*3+j+3)> 9))
+                {
+                    float fb_bias = ((F(i*3 + j) + F(i*3 + j+3))/2.0);
+                    Fb_cal(i*3 + j) = Fb_cal(i*3 + j)  + fb_bias;
+                    Fb_cal(i*3 + j+3) =Fb_cal(i*3 + j+3) - fb_bias;
+                }
+            }
+        }
+        return Fb_cal;
+    }
+    std::vector<float> calc_fb_values(int index_f1) // calculate the bias in the force sensor.
+    {
+        std::vector<float> fb_bias;
+        for (int i = 0; i < 23; i++)
+        {
+            if((G(i*3 + index_f1)> 9) and (G(i*3 + index_f1+3) < -9))
+            {
+                fb_bias.push_back((F(i*3 + index_f1) + F(i*3 + index_f1+3))/2.0);
+            }
+            if((G(i*3+index_f1) < -9) and (G(i*3+index_f1+3)> 9))
+            {
+                fb_bias.push_back((F(i*3+index_f1) + F(i*3+index_f1+3))/2.0);
+            }
+
+        }
+        return fb_bias;
     }
     std::vector<float> calc_tb_values(int from, int to,int index_f1, int index_f2)
     {
         std::vector<float> tb;
         for (int i = from; i < to; i++)//Clac tx bias
         {
-            if (F(i*3+index_f1)>0 and F(i*3+index_f2)>0)
+            if (F_cal(i*3+index_f1)>0 and F_cal(i*3+index_f2)>0)
             {
                 tb.push_back(T(i*3)-( T(i*3+index_f1)-T(i*3+index_f2))); // tb =tx - (ty - tz)
             }
-            else if(F(i*3+index_f1)<0 and F(i*3+index_f2)<0)
+            else if(F_cal(i*3+index_f1)<0 and F_cal(i*3+index_f2)<0)
             {
                 tb.push_back(T(i * 3) - (-T(i * 3 + index_f1) + T(i * 3 + index_f2))); // tb =tx - (-ty + tz)
             }
@@ -74,13 +135,13 @@ public:
 
     Eigen::MatrixXd t_bias_vector() // calculate the bias in the force sensor.
     {
-        Eigen::MatrixXd Tb(3,1);
+        Eigen::MatrixXd T_b(3,1);
         std::vector<float> tb_x;
         std::vector<float> tb_y;
         std::vector<float> tb_z;
         tb_x = calc_tb_values(0,8,1,2);
-        tb_y = calc_tb_values(0,8,0,2);
-        tb_z = calc_tb_values(0,8,0,1);
+        tb_y = calc_tb_values(9,15,0,2);
+        tb_z = calc_tb_values(16,23,0,1);
 
         double tb_x_mean = std::accumulate(tb_x.begin(), tb_x.end(), 0.0) / tb_x.size();
         double tb_y_mean = std::accumulate(tb_y.begin(), tb_y.end(), 0.0) / tb_y.size();
@@ -88,15 +149,7 @@ public:
         Tb << tb_x_mean, tb_y_mean, tb_z_mean;
         return Tb;
     }
-    Eigen::MatrixXd  f_calibration(std::vector<std::vector<float>> f,
-                                   std::vector<std::vector<float>> g)// using the bias to calculate the calibration matrix
-    {
 
-        std::vector<std::vector<float>> Fb = f_bias(f = f, g = g);
-        Eigen::MatrixXd Fb_matrix = conv_vector_to_72x1_matrix(Fb);
-        F_cal = F - Fb_matrix;
-        return F_cal;
-    }
 
     [[nodiscard]] Eigen::MatrixXd  define_A(std::vector<std::vector<float>> g)
     {
@@ -137,7 +190,7 @@ public:
 
     float m_calc()
     {
-        Eigen::VectorXd Fv(Eigen::Map<Eigen::VectorXd>(F_cal.data(), F_cal.cols() * F_cal.rows()));
+        Eigen::VectorXd Fv(Eigen::Map<Eigen::VectorXd>(F.data(), F.cols() * F.rows()));
         Eigen::VectorXd Gv(Eigen::Map<Eigen::VectorXd>(G.data(), G.cols() * G.rows()));
         float v1 = Gv.transpose().dot(Fv);
         float v2 = Gv.transpose().dot(Gv);
@@ -153,7 +206,8 @@ public:
 
     [[nodiscard]] Eigen::MatrixXd  r_calc()
     {
-        auto r = 1 / m_calc() * pseudo_inverse(A) * T;
+        float m = m_calc();
+        auto r = 1 / m * pseudo_inverse(A) * T;
 
         return r;
     }
@@ -164,27 +218,27 @@ public:
         Eigen::VectorXd f1(3,1);
         Eigen::VectorXd f2(3,1);
         Eigen::Vector3d  r = r_calc();
+        float m = m_calc();
         Eigen::Vector3d u1;
         Eigen::Vector3d u2;
 
         u1 =  R.transpose()*G;
-        f1 = m_calc()*u1;
+        f1 = m*u1;
 
         u2 = r.cross(u2);
-        f2 = m_calc()*u2;
+        f2 = m*u2;
 
         f << f1(0,0),f1(1,0),f1(2,0), f2(0,0),f2(1,0),f2(2,0);
         return f;
     }
-
-private:
+public:
     Eigen::MatrixXd F;
     Eigen::MatrixXd F_cal;
     Eigen::MatrixXd G;
     Eigen::MatrixXd T;
     Eigen::MatrixXd R;
     Eigen::MatrixXd A;
-
+    Eigen::MatrixXd Tb;
 };
 
 
