@@ -2,13 +2,15 @@
 // Created by joelo on 14.10.2024.
 //
 
-#ifndef AIS4104_ASSIGNMENTS_BASELINEACC_HPP
-#define AIS4104_ASSIGNMENTS_BASELINEACC_HPP
+
 
 #include <rapidcsv.h>
 #include <vector>
 #include <string>
 #include <stdexcept>
+
+#ifndef AIS4104_ASSIGNMENTS_BASELINEACC_HPP
+#define AIS4104_ASSIGNMENTS_BASELINEACC_HPP
 
 class BaselineAcc {
 public:
