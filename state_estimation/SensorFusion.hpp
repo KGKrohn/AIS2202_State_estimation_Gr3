@@ -25,7 +25,6 @@ public:
         Eigen::DiagonalMatrix<double> sigma_f(0.3090, 0.1110, 1.4084);
 
         Eigen::MatrixXd Rf;
-        Rf << Eigen::D
 
     }
 

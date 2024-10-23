@@ -45,12 +45,20 @@ public:
         return {fx_[index], fy_[index], fz_[index]};
     }
 
+    std::vector<float> getForceMappedVector(const int &index) {
+        return {fxmapped_[index], fymapped_[index], fzmapped_[index]};
+    }
+
     std::vector<float> getForceWithTime(const int &index) {
         return {t_[index], fx_[index], fy_[index], fz_[index]};
     }
 
     std::vector<float> getTorqueVector(const int &index) {
         return {tx_[index], ty_[index], tz_[index]};
+    }
+
+    std::vector<float> getTorqueMappedVector(const int &index) {
+        return {txmapped_[index], tymapped_[index], tzmapped_[index]};
     }
 
     std::vector<float> getAccTorqueWithTime(const int &index) {
@@ -89,6 +97,44 @@ public:
         return column;
     }
 
+    void setVectorMapping(const float &sizeOfColumnWanted) {
+        float interval = float(t_.size()) / sizeOfColumnWanted;
+        for(int i = 0; i < sizeOfColumnWanted; i++) {
+            txmapped_.emplace_back(tx_[int(std::round(float(i) * interval))]);
+        }
+        for(int i = 0; i < sizeOfColumnWanted; i++) {
+            tymapped_.emplace_back(ty_[int(std::round(float(i) * interval))]);
+        }
+        for(int i = 0; i < sizeOfColumnWanted; i++) {
+            tzmapped_.emplace_back(tz_[int(std::round(float(i) * interval))]);
+        }
+        for(int i = 0; i < sizeOfColumnWanted; i++) {
+            fxmapped_.emplace_back(fx_[int(std::round(float(i) * interval))]);
+        }
+        for(int i = 0; i < sizeOfColumnWanted; i++) {
+            fymapped_.emplace_back(fy_[int(std::round(float(i) * interval))]);
+        }
+        for(int i = 0; i < sizeOfColumnWanted; i++) {
+            fzmapped_.emplace_back(fz_[int(std::round(float(i) * interval))]);
+        }
+    }
+
+    std::vector<std::vector<float>> getTorqueVectorMappingColumn() {
+        std::vector<std::vector<float>> column = {};
+        for (int i = 0; i < txmapped_.size(); i++) {
+            column.push_back(getForceMappedVector(i));
+        }
+        return column;
+    }
+
+    std::vector<std::vector<float>> getForceVectorMappingColumn() {
+        std::vector<std::vector<float>> column = {};
+        for (int i = 0; i < fxmapped_.size(); i++) {
+            column.push_back(getForceMappedVector(i));
+        }
+        return column;
+    }
+
     std::vector<float> getSingleTypeColumn_t_() {
         return t_;
     }
@@ -116,6 +162,29 @@ public:
     std::vector<float> getSingleTypeColumn_tz_() {
         return tz_;
     }
+    std::vector<float> getSingleTypeColumnMapped_fx_() {
+        return fxmapped_;
+    }
+
+    std::vector<float> getSingleTypeColumnMapped_fy_() {
+        return fymapped_;
+    }
+
+    std::vector<float> getSingleTypeColumnMapped_fz_() {
+        return fzmapped_;
+    }
+
+    std::vector<float> getSingleTypeColumnMapped_tx_() {
+        return txmapped_;
+    }
+
+    std::vector<float> getSingleTypeColumnMapped_ty_() {
+        return tymapped_;
+    }
+
+    std::vector<float> getSingleTypeColumnMapped_tz_() {
+        return tzmapped_;
+    }
 
 private:
     std::vector<float> t_;
@@ -125,6 +194,12 @@ private:
     std::vector<float> tx_;
     std::vector<float> ty_;
     std::vector<float> tz_;
+    std::vector<float> fxmapped_{};
+    std::vector<float> fymapped_{};
+    std::vector<float> fzmapped_{};
+    std::vector<float> txmapped_{};
+    std::vector<float> tymapped_{};
+    std::vector<float> tzmapped_{};
     std::vector<std::string> variableNames_;
     std::vector<std::vector<float>> data_;
 

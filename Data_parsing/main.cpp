@@ -8,10 +8,10 @@
 #include "DataStore.hpp"
 #include "Calibration.hpp"
 #include "Vibration_Acc.hpp"
+#include "Baseline_wrench.hpp"
+#include "Baseline_orientations.hpp"
 
 
-
-CalibrationFTS fileRead2("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/0-calibration_fts-accel.csv");
 
 Eigen::MatrixXd pseudo_inverse(const Eigen::MatrixXd &A)
 {
@@ -20,8 +20,16 @@ Eigen::MatrixXd pseudo_inverse(const Eigen::MatrixXd &A)
 
 int main()
 {
-    std::cout << "[ " << fileRead2.getForceVector(0)[0] << ", "
-    << fileRead2.getForceVector(0)[1] << ", " << fileRead2.getForceVector(0)[2] << " ]" << std::endl;
+    Baseline_wrench baseline("C:/Users/joelo/AIS2202_code/Del2/AIS2202_State_estimation_Gr3/Data/1-baseline_wrench.csv");
+    Baseline_orientations baseorient("C:/Users/joelo/AIS2202_code/Del2/AIS2202_State_estimation_Gr3/Data/1-baseline_orientations.csv");
+    int sizeOfOrientVec = baseorient.getSingleTypeColumn_r11_().size();
+    std::cout << "Orientation: " << sizeOfOrientVec << std::endl;
+
+    baseline.setVectorMapping(sizeOfOrientVec);
+    std::cout << "Wrench: " << baseline.getSingleTypeColumnMapped_fx_().size() << std::endl;
+
+
+
 
     return 0;
 }
