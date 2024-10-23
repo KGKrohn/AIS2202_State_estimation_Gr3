@@ -61,18 +61,18 @@ int main()
     kf.update_static_variables(SaSDa, SfSDf, StSDt);
     kf.Q_calc(SDk);
     kf.B_calc();
+    std::vector<Eigen::VectorXd> X= {};
 
-    auto Rws = kf.Rws(r11[1],r12[1],r13[1],r21[1],r22[1],r23[1],r31[1],r32[1],r33[1]);
-    Eigen::MatrixXd g_delta(3,1);
-    g_delta << 1,1,1;
+    for (int i = 0; i < 600; i++)
+    {
+        kf.Rws(r11[i],r12[i],r13[i],r21[i],r22[i],r23[i],r31[i],r32[i],r33[i]);
 
-    Eigen::MatrixXd u(3,1);
-    u = kf.uk(Rws, g_delta, fr, ff, fa);
-    kf.predict(u);
-    auto x = kf.get_state();
-    auto p = kf.get_covariance();
-    std::cout << "x: "<< x << std::endl;
-    std::cout << "p: "<< p << std::endl;
-    kf.update();
+        Eigen::MatrixXd u = kf.uk(ax[i],ay[i],az[i], fr, ff, fa);
+        kf.predict(u);
+        kf.update();
+        X.emplace_back(kf.get_state());
+    }
+    std::cout << "X" << X[100] << std::endl;
+
 
 }
