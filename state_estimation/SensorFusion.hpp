@@ -9,7 +9,25 @@
 class SensorFusion {
 public:
     SensorFusion(double mass, const Eigen::Vector3d& massCenter,
-                 const Eigen::VectorXd& ftsBias, const Eigen::Vector3d& imuBias);
+                 const Eigen::VectorXd& ftsBias, const Eigen::Vector3d& imuBias){
+
+        Q_ << Eigen::MatrixXd::Identity(3,3), Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Zero(3, 3),
+                Eigen::MatrixXd::Zero(3, 3), mass * Eigen::MatrixXd::Identity(3,3), Eigen::MatrixXd::Zero(3, 3),
+                Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Zero(3, 3), mass * massCenter.cwiseAbs() * Eigen::MatrixXd::Identity(3,3);
+
+        Eigen::MatrixXd Hf;
+        Hf << Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Identity(3,3), Eigen::MatrixXd::Zero(3, 3),
+                Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Identity(3,3);
+        Eigen::MatrixXd Ha;
+        Ha << Eigen::MatrixXd::Identity(3,3), Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Zero(3, 3);
+
+
+        Eigen::DiagonalMatrix<double> sigma_f(0.3090, 0.1110, 1.4084);
+
+        Eigen::MatrixXd Rf;
+        Rf << Eigen::D
+
+    }
 
 
     //oppdater sensordata, synchronize timestamps
