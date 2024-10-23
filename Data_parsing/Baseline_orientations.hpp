@@ -1,7 +1,3 @@
-//
-// Created by joelo on 14.10.2024.
-//
-
 #include <rapidcsv.h>
 #include <fstream>
 #include <sstream>
@@ -9,6 +5,7 @@
 #include <iomanip>
 #include <vector>
 #include <Eigen/Dense>
+
 #ifndef AIS4104_ASSIGNMENTS_VIBRATION_ORIENTATION_HPP
 #define AIS4104_ASSIGNMENTS_VIBRATION_ORIENTATION_HPP
 
