@@ -39,9 +39,9 @@ namespace estimation {
 
         Eigen::MatrixXd rs_sqew_matrix() {
             Eigen::MatrixXd rs_sqew(3,3);
-            rs_sqew << 0, -r_(2,0), r_(1,0),
-                    r_(2,0), 0, -r_(0,0),
-                    -r_(1,0), r_(0,0), 0;
+            rs_sqew << 0,                 -r_(2,0) , r_(1,0),
+                       r_(2,0),  0                 , -r_(0,0),
+                       -r_(1,0), r_(0,0)  , 0;
             return rs_sqew;
         }
 
@@ -96,10 +96,10 @@ namespace estimation {
         Eigen::MatrixXd uk(float ax,float ay,float az, float fr, float ff, float fa) {
             Eigen::MatrixXd gw(3,1);
             gw << ax,ay,az;
+            Eigen::MatrixXd gs  = Rws_.transpose()*gw;
 
-            //Eigen::MatrixXd u_k = a * (fr / (ff - fa));
-            Eigen::MatrixXd u_k = ((Rws_.transpose()*gw) - g_) * (fr / (ff - fa));
-            g_ = (Rws_.transpose()*gw);
+            Eigen::MatrixXd u_k = (gs - g_) * (fr / (ff - fa));
+            g_ = gs;
             return u_k;
         }
 
@@ -164,6 +164,13 @@ namespace estimation {
             Rws_ << r11, r12, r13,
                     r21, r22, r23,
                     r31, r32, r33;
+        }
+        Eigen::MatrixXd R_fa_get() {
+            Eigen::MatrixXd R_fa(3,3);
+            R_fa <<  0, 0, -1,
+                    -1, 0,  0,
+                     0, 1,  0;
+            return R_fa;
         }
 
     private:
