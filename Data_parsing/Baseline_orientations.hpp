@@ -18,7 +18,7 @@ public:
         this->variableNames_ = extraction.GetColumnNames();
 
         for (int count = 0; count < variableNames_.size(); count++) {
-            this->data_.push_back(extraction.GetColumn<float>(count));
+            this->data_.push_back(extraction.GetColumn<double>(count));
         }
 
         this->t_ = data_[getVariableNameIndex("t")];
@@ -43,67 +43,67 @@ public:
         throw std::runtime_error("Variable name not found: " + name);
     }
 
-    std::vector<float> getRVector(const int &index) {
+    std::vector<double> getRVector(const int &index) {
         return {r11_[index], r12_[index], r13_[index], r21_[index], r22_[index], r23_[index], r31_[index], r32_[index], r33_[index]};
     }
 
-    std::vector<float> getRVectorWithTime(const int &index) {
+    std::vector<double> getRVectorWithTime(const int &index) {
         return {t_[index], r11_[index], r12_[index], r13_[index], r21_[index], r22_[index], r23_[index], r31_[index], r32_[index], r33_[index]};
     }
 
-    std::vector<std::vector<float>> getRVectorColumn() {
-        std::vector<std::vector<float>> column = {};
+    std::vector<std::vector<double>> getRVectorColumn() {
+        std::vector<std::vector<double>> column = {};
         for (int i = 0; i < r11_.size(); i++) {
             column.push_back(getRVector(i));
         }
         return column;
     }
 
-    std::vector<std::vector<float>> getAccVectorWithTimeColumn() {
-        std::vector<std::vector<float>> column = {};
+    std::vector<std::vector<double>> getAccVectorWithTimeColumn() {
+        std::vector<std::vector<double>> column = {};
         for (int i = 0; i < r11_.size(); i++) {
             column.push_back(getRVectorWithTime(i));
         }
         return column;
     }
 
-    std::vector<float> getSingleTypeColumn_t_() {
+    std::vector<double> getSingleTypeColumn_t_() {
         return t_;
     }
 
-    std::vector<float> getSingleTypeColumn_r11_() {
+    std::vector<double> getSingleTypeColumn_r11_() {
         return r11_;
     }
 
-    std::vector<float> getSingleTypeColumn_r12_() {
+    std::vector<double> getSingleTypeColumn_r12_() {
         return r12_;
     }
 
-    std::vector<float> getSingleTypeColumn_r13_() {
+    std::vector<double> getSingleTypeColumn_r13_() {
         return r13_;
     }
 
-    std::vector<float> getSingleTypeColumn_r21_() {
+    std::vector<double> getSingleTypeColumn_r21_() {
         return r21_;
     }
 
-    std::vector<float> getSingleTypeColumn_r22_() {
+    std::vector<double> getSingleTypeColumn_r22_() {
         return r22_;
     }
 
-    std::vector<float> getSingleTypeColumn_r23_() {
+    std::vector<double> getSingleTypeColumn_r23_() {
         return r23_;
     }
 
-    std::vector<float> getSingleTypeColumn_r31_() {
+    std::vector<double> getSingleTypeColumn_r31_() {
         return r31_;
     }
 
-    std::vector<float> getSingleTypeColumn_r32_() {
+    std::vector<double> getSingleTypeColumn_r32_() {
         return r32_;
     }
 
-    std::vector<float> getSingleTypeColumn_r33_() {
+    std::vector<double> getSingleTypeColumn_r33_() {
         return r33_;
     }
 
@@ -124,18 +124,18 @@ public:
     }
 
 private:
-    std::vector<float> t_;
-    std::vector<float> r11_;
-    std::vector<float> r12_;
-    std::vector<float> r13_;
-    std::vector<float> r21_;
-    std::vector<float> r22_;
-    std::vector<float> r23_;
-    std::vector<float> r31_;
-    std::vector<float> r32_;
-    std::vector<float> r33_;
+    std::vector<double> t_;
+    std::vector<double> r11_;
+    std::vector<double> r12_;
+    std::vector<double> r13_;
+    std::vector<double> r21_;
+    std::vector<double> r22_;
+    std::vector<double> r23_;
+    std::vector<double> r31_;
+    std::vector<double> r32_;
+    std::vector<double> r33_;
     std::vector<std::string> variableNames_;
-    std::vector<std::vector<float>> data_;
+    std::vector<std::vector<double>> data_;
 };
 
 

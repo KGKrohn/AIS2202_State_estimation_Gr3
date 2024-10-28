@@ -35,46 +35,81 @@ int main()
     std::vector<float> StSDt= {0.0068, 0.0175, 0.0003};
 
     Baseline_orientations b_o("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/Data/1-baseline_orientations.csv");
-    std::vector<float> r11 = b_o.getSingleTypeColumn_r11_();
-    std::vector<float> r12 = b_o.getSingleTypeColumn_r12_();
-    std::vector<float> r13 = b_o.getSingleTypeColumn_r13_();
-    std::vector<float> r21 = b_o.getSingleTypeColumn_r21_();
-    std::vector<float> r22 = b_o.getSingleTypeColumn_r22_();
-    std::vector<float> r23 = b_o.getSingleTypeColumn_r23_();
-    std::vector<float> r31 = b_o.getSingleTypeColumn_r31_();
-    std::vector<float> r32 = b_o.getSingleTypeColumn_r32_();
-    std::vector<float> r33 = b_o.getSingleTypeColumn_r33_();
+    std::vector<double> tr = b_o.getSingleTypeColumn_t_();
+    std::vector<double> r11 = b_o.getSingleTypeColumn_r11_();
+    std::vector<double> r12 = b_o.getSingleTypeColumn_r12_();
+    std::vector<double> r13 = b_o.getSingleTypeColumn_r13_();
+    std::vector<double> r21 = b_o.getSingleTypeColumn_r21_();
+    std::vector<double> r22 = b_o.getSingleTypeColumn_r22_();
+    std::vector<double> r23 = b_o.getSingleTypeColumn_r23_();
+    std::vector<double> r31 = b_o.getSingleTypeColumn_r31_();
+    std::vector<double> r32 = b_o.getSingleTypeColumn_r32_();
+    std::vector<double> r33 = b_o.getSingleTypeColumn_r33_();
 
 
     Baseline_wrench b_w("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/Data/1-Baseline_wrench.csv");
-    std::vector<float> fx = b_w.getSingleTypeColumn_fx_();
-    std::vector<float> fy = b_w.getSingleTypeColumn_fy_();
-    std::vector<float> fz = b_w.getSingleTypeColumn_fz_();
-    std::vector<float> tx = b_w.getSingleTypeColumn_tx_();
-    std::vector<float> ty = b_w.getSingleTypeColumn_ty_();
-    std::vector<float> tz = b_w.getSingleTypeColumn_tz_();
+    std::vector<double> tft = b_w.getSingleTypeColumn_t_();
+    std::vector<double> fx = b_w.getSingleTypeColumn_fx_();
+    std::vector<double> fy = b_w.getSingleTypeColumn_fy_();
+    std::vector<double> fz = b_w.getSingleTypeColumn_fz_();
+    std::vector<double> tx = b_w.getSingleTypeColumn_tx_();
+    std::vector<double> ty = b_w.getSingleTypeColumn_ty_();
+    std::vector<double> tz = b_w.getSingleTypeColumn_tz_();
 
     BaselineAcc b_a("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/Data/1-baseline_accel.csv");
-    std::vector<float> ax = b_a.getSingleTypeColumn_ax();
-    std::vector<float> ay = b_a.getSingleTypeColumn_ay();
-    std::vector<float> az = b_a.getSingleTypeColumn_az();
+    std::vector<double> ta = b_a.getSingleTypeColumn_t();
+    std::vector<double> ax = b_a.getSingleTypeColumn_ax();
+    std::vector<double> ay = b_a.getSingleTypeColumn_ay();
+    std::vector<double> az = b_a.getSingleTypeColumn_az();
 
     estimation::kalman_filter kf(x0, P0,m,r);
-    kf.update_static_variables(SaSDa, SfSDf, StSDt);
-    kf.Q_calc(SDk);
+    std::vector<double> Ta = kf.scale_time_array(ta);
+    std::vector<double> Tft = kf.scale_time_array(tft);
+    std::vector<double> Tr = kf.scale_time_array(tr);
+
+    kf.update_static_variables(SaSDa, SfSDf, StSDt,0.5);
     kf.B_calc();
     std::vector<Eigen::VectorXd> X= {};
+    std::vector<Eigen::VectorXd> Xf= {};
+    int ir = 0;
+    int ia = 0;
+    int ift = 0;
 
-    for (int i = 0; i < 600; i++)
+    for (int i = 0; i < Tr.back(); i++)
     {
-        kf.Rws(r11[i],r12[i],r13[i],r21[i],r22[i],r23[i],r31[i],r32[i],r33[i]);
-
-        Eigen::MatrixXd u = kf.uk(ax[int(i*2.56)],ay[int(i*2.56)],az[int(i*2.56)], fr, ff, fa);
-        kf.predict(u);
-        kf.update();
-        X.emplace_back(kf.get_state());
+        if (Tr[ir] == i)
+        {
+            kf.Rws(r11[ir],r12[ir],r13[ir],r21[ir],r22[ir],r23[ir],r31[ir],r32[ir],r33[ir]);
+            ir = ir + 1;
+        }
+        if (Ta[ia] == i)
+        {
+            kf.uk(ax[ia],ay[ia],az[ia], fr, ff, fa);
+            kf.za_update(ax[ia], ay[ia], az[ia], fx[ift], fy[ift], fz[ift], tx[ift], ty[ift], tz[ift]);
+            kf.predict();
+            kf.update();
+            X.emplace_back(kf.get_state());
+            ia = ia + 1;
+        }
+        if (Tft[ift] == i)
+        {
+            kf.uk(ax[ia],ay[ia],az[ia], fr, ff, fa);
+            kf.zf_update(ax[ia], ay[ia], az[ia], fx[ift], fy[ift], fz[ift], tx[ift], ty[ift], tz[ift]);
+            kf.predict();
+            kf.update();
+            Xf.emplace_back(kf.get_state());
+            ift = ift + 1;
+        }
     }
-    std::cout << "X" << X[300] << std::endl;
-
+    std::cout << "ir " << ir<< std::endl;
+    std::cout << "ia " << ia<< std::endl;
+    std::cout << "ift " << ift<< std::endl;
+    std::cout << "X.size() " << X.size() << std::endl;
+    std::cout << "Xf.size() " << Xf.size() << std::endl;
+    std::cout << "X 500 "  << Xf[500] << std::endl;
+    std::cout << "X 1000 "  << Xf[1000] << std::endl;
+    std::cout << "X 2000 "  << Xf[2000] << std::endl;
+    std::cout << "X 3000 "  << Xf[3000] << std::endl;
+    std::cout << "X 4000 "  << Xf[4000] << std::endl;
 
 }

@@ -11,16 +11,18 @@ namespace estimation {
                       const Eigen::MatrixXd& P0,float m,
                       const Eigen::MatrixXd& r):
                       x_(x0), P_(P0), m_(m),r_(r),
-                      Q(9,9),B(9,3),Rws_(3,3),g_(3,1) {};
+                      Q(9,9),B(9,3),Rws_(3,3),g_(3,1),U(3,1) {};
 
         void update_static_variables(std::vector<float> SaSDa,
                                      std::vector<float> SfSDf,
-                                     std::vector<float> StSDt) {
+                                     std::vector<float> StSDt,
+                                     float SDK) {
             SaSDa_ = SaSDa;
             SfSDf_ = SfSDf;
             StSDt_ = StSDt;
-            Q_calc(0.5);
+            Q_calc(SDK);
             B_calc();
+            U<< 0,0,0;
         }
 
         void Q_calc(float SDk) {
@@ -80,70 +82,6 @@ namespace estimation {
             return Rf;
         }
 
-        Eigen::MatrixXd Zc_matrix(Eigen::MatrixXd Xest) {
-            Eigen::MatrixXd rs_sqew = rs_sqew_matrix();
-            Eigen::MatrixXd Z(6,9);
-            Z << -m_, 0, 0, 1, 0, 0, 0, 0, 0,
-                  0, -m_, 0, 0, 1, 0, 0, 0, 0,
-                  0, 0, -m_, 0, 0, 1, 0, 0, 0,
-                  -m_*rs_sqew(0,0), -m_*rs_sqew(0,1), -m_*rs_sqew(0,2), 0, 0, 0, 1, 0, 0,
-                  -m_*rs_sqew(1,0), -m_*rs_sqew(1,1), -m_*rs_sqew(1,2), 0, 0, 0, 0, 1, 0,
-                  -m_*rs_sqew(2,0), -m_*rs_sqew(2,1), -m_*rs_sqew(2,2), 0, 0, 0, 0, 0, 1;
-            Eigen::MatrixXd Zc = Z*Xest;
-            return Zc;
-        }
-
-        Eigen::MatrixXd uk(float ax,float ay,float az, float fr, float ff, float fa) {
-            Eigen::MatrixXd gw(3,1);
-            gw << ax,ay,az;
-            Eigen::MatrixXd gs  = Rws_.transpose()*gw;
-
-            Eigen::MatrixXd u_k = (gs - g_) * (fr / (ff - fa));
-            g_ = gs;
-            return u_k;
-        }
-
-        void predict(Eigen::MatrixXd u) {
-            Eigen::MatrixXd A = Eigen::MatrixXd::Identity(9, 9);
-
-            x_ = A * x_ + B*u;
-            P_ = A * P_ * A.transpose() + Q;
-        }
-
-
-        void update() {
-            Eigen::MatrixXd z = Zc_matrix(x_);
-            Eigen::MatrixXd H = Hf_matrix();
-            Eigen::MatrixXd R = Rf_matrix();
-
-            K_ = (P_ * H.transpose()) * (H * P_ * H.transpose() + R).inverse();
-            x_ = x_ + K_ * (z - H * x_);
-            Eigen::MatrixXd I = Eigen::MatrixXd::Identity(x_.size(), x_.size());
-            P_ = (I - K_ * H) * P_;
-        }
-
-        Eigen::VectorXd get_state() const {
-            return x_;
-        }
-
-        Eigen::MatrixXd get_covariance() const {
-            return P_;
-        }
-        /*
-        Eigen::MatrixXd H_matrix() {
-            Eigen::MatrixXd H(9,9);
-            H <<    0, 0, 0, 1, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 1, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 1, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 1,
-                    1, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 1, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 1, 0, 0, 0, 0, 0, 0;
-            return H;
-        }
-
         Eigen::MatrixXd Ra_matrix() {
             Eigen::MatrixXd Ra(3,3);
             Ra <<   SaSDa_[0], 0, 0,
@@ -159,19 +97,84 @@ namespace estimation {
                     0, 0, 1, 0, 0, 0, 0, 0, 0;
             return Ha;
         }
-        */
+
+        std::vector<double> scale_time_array(std::vector<double> time_array) {
+            double start = time_array.front();
+            for (int i = 0; i < time_array.size(); i++)
+            {
+                time_array[i] = time_array[i]- start;
+            }
+            return time_array;
+        }
+
         void Rws(float r11,float r12,float r13,float r21,float r22,float r23,float r31,float r32,float r33) {
             Rws_ << r11, r12, r13,
                     r21, r22, r23,
                     r31, r32, r33;
         }
-        Eigen::MatrixXd R_fa_get() {
-            Eigen::MatrixXd R_fa(3,3);
-            R_fa <<  0, 0, -1,
-                    -1, 0,  0,
-                     0, 1,  0;
-            return R_fa;
+
+        void uk(float ax,float ay,float az, float fr, float ff, float fa) {
+            Eigen::MatrixXd gw(3,1);
+            gw << ax,ay,az;
+            Eigen::MatrixXd gs  = Rws_.transpose()*gw;
+
+            U = (gs - g_) * (fr / (ff - fa));
+            g_ = gs;
         }
+
+        Eigen::MatrixXd Zc_matrix(Eigen::MatrixXd Xest) {
+            Eigen::MatrixXd rs_sqew = rs_sqew_matrix();
+            Eigen::MatrixXd Z(6,9);
+            Z << -m_, 0, 0, 1, 0, 0, 0, 0, 0,
+                    0, -m_, 0, 0, 1, 0, 0, 0, 0,
+                    0, 0, -m_, 0, 0, 1, 0, 0, 0,
+                    -m_*rs_sqew(0,0), -m_*rs_sqew(0,1), -m_*rs_sqew(0,2), 0, 0, 0, 1, 0, 0,
+                    -m_*rs_sqew(1,0), -m_*rs_sqew(1,1), -m_*rs_sqew(1,2), 0, 0, 0, 0, 1, 0,
+                    -m_*rs_sqew(2,0), -m_*rs_sqew(2,1), -m_*rs_sqew(2,2), 0, 0, 0, 0, 0, 1;
+            Eigen::MatrixXd Zc = Z*Xest;
+            return Zc;
+        }
+
+        void  zf_update(float ax,float ay, float az, float fx, float fy, float fz, float tx, float ty, float tz) {
+            Eigen::MatrixXd x(9,1);
+            x << ax, ay, az, fx, fy, fz, tx, ty, tz;
+            H_ = Hf_matrix();
+            Z_ = H_*x;
+            R_ = Rf_matrix();
+        }
+
+        void za_update(float ax,float ay, float az, float fx, float fy, float fz, float tx, float ty, float tz) {
+            Eigen::MatrixXd x(9,1);
+            x << ax, ay, az, fx, fy, fz, tx, ty, tz;
+            H_ = Ha_matrix();
+            Z_ = H_*x;
+            R_ = Ra_matrix();
+        }
+
+        void predict() {
+            Eigen::MatrixXd A = Eigen::MatrixXd::Identity(9, 9);
+
+            x_ = A * x_ + B*U;
+            P_ = A * P_ * A.transpose() + Q;
+        }
+
+
+        void update() {
+            K_ = (P_ * H_.transpose()) * (H_ * P_ * H_.transpose() + R_).inverse();
+            x_ = x_ + K_ * (Z_ - H_ * x_);
+            Eigen::MatrixXd I = Eigen::MatrixXd::Identity(x_.size(), x_.size());
+            P_ = (I - K_ * H_) * P_;
+        }
+
+        Eigen::VectorXd get_state() const {
+            return x_;
+        }
+
+        Eigen::MatrixXd get_covariance() const {
+            return P_;
+        }
+
+
 
     private:
         float m_;
@@ -180,6 +183,10 @@ namespace estimation {
         Eigen::MatrixXd P_; // State covariance
         Eigen::MatrixXd K_; // Kalman gain
         Eigen::MatrixXd Q; //
+        Eigen::MatrixXd Z_; //
+        Eigen::MatrixXd H_; //
+        Eigen::MatrixXd R_; //
+        Eigen::MatrixXd U; //
         Eigen::MatrixXd B; // B
         Eigen::MatrixXd Rws_;
         Eigen::MatrixXd g_;
