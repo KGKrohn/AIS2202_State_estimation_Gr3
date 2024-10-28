@@ -67,7 +67,7 @@ int main()
     {
         kf.Rws(r11[i],r12[i],r13[i],r21[i],r22[i],r23[i],r31[i],r32[i],r33[i]);
 
-        Eigen::MatrixXd u = kf.uk(ax[i],ay[i],az[i], fr, ff, fa);
+        Eigen::MatrixXd u = kf.uk(ax[int(i*2.56)],ay[int(i*2.56)],az[int(i*2.56)], fr, ff, fa);
         kf.predict(u);
         kf.update();
         X.emplace_back(kf.get_state());
