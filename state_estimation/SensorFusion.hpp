@@ -22,9 +22,10 @@ public:
         Ha << Eigen::MatrixXd::Identity(3,3), Eigen::MatrixXd::Zero(3, 3), Eigen::MatrixXd::Zero(3, 3);
 
 
-        Eigen::DiagonalMatrix<double> sigma_f(0.3090, 0.1110, 1.4084);
+        Eigen::DiagonalMatrix<double> sigma_f(, , );
 
         Eigen::MatrixXd Rf;
+        Rf << 0.3090, 0.1110, 1.4084,
 
     }
 
@@ -38,11 +39,12 @@ public:
 private:
     Eigen::VectorXd state_;
     Eigen::MatrixXd A_, Q_, R_, P_;
+    Eigen::MatrixXd z_;
 
 
     Eigen::VectorXd ftsBias_;
     Eigen::Vector3d imuBias_;
-    double mass;
+    double mass_;
     Eigen::Vector3d massCenter_;
 
     void predict();

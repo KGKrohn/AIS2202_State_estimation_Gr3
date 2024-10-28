@@ -32,7 +32,7 @@ int main()
     std::vector<float> SfSDf= {0.3090, 0.1110, 1.4084};
     std::vector<float> StSDt= {0.0068, 0.0175, 0.0003};
 
-    Baseline_orientations b_o("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/Data/1-baseline_orientations.csv");
+    Baseline_orientations b_o("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/1-baseline_orientations.csv");
     std::vector<float> r11 = b_o.getSingleTypeColumn_r11_();
     std::vector<float> r12 = b_o.getSingleTypeColumn_r12_();
     std::vector<float> r13 = b_o.getSingleTypeColumn_r13_();
@@ -44,18 +44,20 @@ int main()
     std::vector<float> r33 = b_o.getSingleTypeColumn_r33_();
 
 
-    Baseline_wrench b_w("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/Data/1-Baseline_wrench.csv");
-    std::vector<float> fx = b_w.getSingleTypeColumn_fx_();
-    std::vector<float> fy = b_w.getSingleTypeColumn_fy_();
-    std::vector<float> fz = b_w.getSingleTypeColumn_fz_();
-    std::vector<float> tx = b_w.getSingleTypeColumn_tx_();
-    std::vector<float> ty = b_w.getSingleTypeColumn_ty_();
-    std::vector<float> tz = b_w.getSingleTypeColumn_tz_();
+    Baseline_wrench b_w("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/1-Baseline_wrench.csv");
+    b_w.setVectorMapping(r11.size());
+    std::vector<float> fx = b_w.getSingleTypeColumnMapped_fx_();
+    std::vector<float> fy = b_w.getSingleTypeColumnMapped_fy_();
+    std::vector<float> fz = b_w.getSingleTypeColumnMapped_fz_();
+    std::vector<float> tx = b_w.getSingleTypeColumnMapped_tx_();
+    std::vector<float> ty = b_w.getSingleTypeColumnMapped_ty_();
+    std::vector<float> tz = b_w.getSingleTypeColumnMapped_tz_();
 
-    BaselineAcc b_a("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/Data/1-baseline_accel.csv");
-    std::vector<float> ax = b_a.getSingleTypeColumn_ax();
-    std::vector<float> ay = b_a.getSingleTypeColumn_ay();
-    std::vector<float> az = b_a.getSingleTypeColumn_az();
+    BaselineAcc b_a("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/1-baseline_accel.csv");
+    b_a.setVectorMapping(r11.size());
+    std::vector<float> ax = b_a.getSingleTypeMappedColumn_ax();
+    std::vector<float> ay = b_a.getSingleTypeMappedColumn_ay();
+    std::vector<float> az = b_a.getSingleTypeMappedColumn_az();
 
     estimation::kalman_filter kf(x0, P0,m,r);
     kf.update_static_variables(SaSDa, SfSDf, StSDt);

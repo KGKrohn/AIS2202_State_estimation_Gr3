@@ -21,9 +21,9 @@ Eigen::MatrixXd pseudo_inverse(const Eigen::MatrixXd &A)
 
 int main()
 {
-    Baseline_wrench basewrench("C:/Users/joelo/AIS2202_code/Del2/AIS2202_State_estimation_Gr3/Data/1-baseline_wrench.csv");
-    Baseline_orientations baseorient("C:/Users/joelo/AIS2202_code/Del2/AIS2202_State_estimation_Gr3/Data/1-baseline_orientations.csv");
-    BaselineAcc baseacc("C:/Users/joelo/AIS2202_code/Del2/AIS2202_State_estimation_Gr3/Data/1-baseline_accel.csv");
+    Baseline_wrench basewrench("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/1-baseline_wrench.csv");
+    Baseline_orientations baseorient("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/1-baseline_orientations.csv");
+    BaselineAcc baseacc("D:/AIS2202_code/AIS2202_State_estimation_Gr3/Data/1-baseline_accel.csv");
     int sizeOfOrientVec = baseorient.getSingleTypeColumn_r11_().size();
     std::cout << "Orientation: " << sizeOfOrientVec << std::endl;
 
