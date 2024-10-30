@@ -3,6 +3,7 @@
 
 #include <Eigen/Dense>
 #include <iostream>
+#include <fstream>
 
 namespace estimation {
     class kalman_filter {
@@ -11,7 +12,9 @@ namespace estimation {
                       const Eigen::MatrixXd& P0,float m,
                       const Eigen::MatrixXd& r):
                       x_(x0), P_(P0), m_(m),r_(r),
-                      Q(9,9),B(9,3),Rws_(3,3),g_(3,1),U(3,1) {};
+                      Q(9,9),B(9,3),Rws_(3,3),g_(3,1),U(3,1) {
+            state_variable_names = {"ax", "ay", "az", "fx", "fy", "fz", "tx", "ty", "tz"};
+        };
 
         void update_static_variables(std::vector<float> SaSDa,
                                      std::vector<float> SfSDf,
@@ -23,6 +26,40 @@ namespace estimation {
             Q_calc(SDK);
             B_calc();
             U<< 0,0,0;
+        }
+
+
+
+        bool write_state_to_csv(const std::string& filename, bool append = true) const {
+            std::ofstream file;
+            //Åpning av fil
+            if (append) {
+                file.open(filename, std::ios::app);
+            } else {
+                file.open(filename);
+                for (size_t i = 0; i < state_variable_names.size(); ++i) {
+                    file << state_variable_names[i];
+                    if (i < state_variable_names.size() - 1) {
+                        file << ",";
+                    }
+                }
+                file << "\n";
+            }
+
+            if (!file.is_open()) {
+                return false;
+            }
+            //skriving av data
+            for (int i = 0; i < x_.size(); ++i) {
+                file << x_(i);
+                if (i < x_.size() - 1) {
+                    file << ",";
+                }
+            }
+            file << "\n";
+
+            file.close();
+            return true;
         }
 
         void Q_calc(float SDk) {
@@ -157,6 +194,7 @@ namespace estimation {
             x_ = A * x_ + B*U;
             P_ = A * P_ * A.transpose() + Q;
         }
+        
 
 
         void update() {
@@ -177,6 +215,7 @@ namespace estimation {
 
 
     private:
+        std::vector<std::string> state_variable_names;
         float m_;
         Eigen::MatrixXd x_; // State estimate
         Eigen::MatrixXd r_; // State estimate

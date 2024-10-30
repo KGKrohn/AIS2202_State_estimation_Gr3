@@ -74,9 +74,10 @@ int main()
     int ir = 0;
     int ia = 0;
     int ift = 0;
-
+    kf.write_state_to_csv("Test1.csv",false);
     for (int i = 0; i < Tr.back(); i++)
     {
+
         if (Tr[ir] == i)
         {
             kf.Rws(r11[ir],r12[ir],r13[ir],r21[ir],r22[ir],r23[ir],r31[ir],r32[ir],r33[ir]);
@@ -98,8 +99,15 @@ int main()
             kf.predict();
             kf.update();
             Xf.emplace_back(kf.get_state());
+            kf.write_state_to_csv("Test1.csv",true);
             ift = ift + 1;
         }
+
+    }
+
+    for (int i = 0; i < X.size(); i++)
+    {
+
     }
     std::cout << "ir " << ir<< std::endl;
     std::cout << "ia " << ia<< std::endl;
