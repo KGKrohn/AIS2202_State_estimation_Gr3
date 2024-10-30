@@ -74,19 +74,23 @@ int main()
     int ir = 0;
     int ia = 0;
     int ift = 0;
-    kf.write_state_to_csv("Test1.csv",false);
+    //kf.write_state_to_csv("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/estimation/include/force_tourqe.csv",false);
     for (int i = 0; i < Tr.back(); i++)
     {
 
         if (Tr[ir] == i)
         {
-            kf.Rws(r11[ir],r12[ir],r13[ir],r21[ir],r22[ir],r23[ir],r31[ir],r32[ir],r33[ir]);
+            kf.Rws(r11[ir],r12[ir],r13[ir],
+                   r21[ir],r22[ir],r23[ir],
+                   r31[ir],r32[ir],r33[ir]);
             ir = ir + 1;
         }
         if (Ta[ia] == i)
         {
             kf.uk(ax[ia],ay[ia],az[ia], fr, ff, fa);
-            kf.za_update(ax[ia], ay[ia], az[ia], fx[ift], fy[ift], fz[ift], tx[ift], ty[ift], tz[ift]);
+            kf.za_update(ax[ia], ay[ia], az[ia],
+                         fx[ift], fy[ift], fz[ift],
+                         tx[ift], ty[ift], tz[ift]);
             kf.predict();
             kf.update();
             X.emplace_back(kf.get_state());
@@ -95,20 +99,17 @@ int main()
         if (Tft[ift] == i)
         {
             kf.uk(ax[ia],ay[ia],az[ia], fr, ff, fa);
-            kf.zf_update(ax[ia], ay[ia], az[ia], fx[ift], fy[ift], fz[ift], tx[ift], ty[ift], tz[ift]);
+            kf.zf_update(ax[ia], ay[ia], az[ia],
+                         fx[ift], fy[ift], fz[ift],
+                         tx[ift], ty[ift], tz[ift]);
             kf.predict();
             kf.update();
             Xf.emplace_back(kf.get_state());
-            kf.write_state_to_csv("Test1.csv",true);
+            //kf.write_state_to_csv("C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/estimation/include/force_tourqe.csv",true,i);
             ift = ift + 1;
         }
-
     }
-
-    for (int i = 0; i < X.size(); i++)
-    {
-
-    }
+    /*
     std::cout << "ir " << ir<< std::endl;
     std::cout << "ia " << ia<< std::endl;
     std::cout << "ift " << ift<< std::endl;
@@ -119,5 +120,5 @@ int main()
     std::cout << "X 2000 "  << Xf[2000] << std::endl;
     std::cout << "X 3000 "  << Xf[3000] << std::endl;
     std::cout << "X 4000 "  << Xf[4000] << std::endl;
-
+    */
 }
