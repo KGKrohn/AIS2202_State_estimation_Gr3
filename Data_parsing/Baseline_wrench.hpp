@@ -19,7 +19,7 @@ public:
         this->variableNames_ = extraction.GetColumnNames();
 
         for (int count = 0; count < variableNames_.size(); count++) {
-            this->data_.push_back(extraction.GetColumn<float>(count));
+            this->data_.push_back(extraction.GetColumn<double>(count));
         }
 
         this->t_ = data_[getVariableNameIndex("t")];
@@ -41,92 +41,93 @@ public:
         throw std::runtime_error("Variable name not found: " + name);
     }
 
-    std::vector<float> getForceVector(const int &index) {
+    std::vector<double> getForceVector(const int &index) {
         return {fx_[index], fy_[index], fz_[index]};
     }
 
-    std::vector<float> getForceWithTime(const int &index) {
+    std::vector<double> getForceWithTime(const int &index) {
         return {t_[index], fx_[index], fy_[index], fz_[index]};
     }
 
-    std::vector<float> getTorqueVector(const int &index) {
+    std::vector<double> getTorqueVector(const int &index) {
         return {tx_[index], ty_[index], tz_[index]};
     }
 
-    std::vector<float> getAccTorqueWithTime(const int &index) {
+    std::vector<double> getAccTorqueWithTime(const int &index) {
         return {t_[index], tx_[index], ty_[index], tz_[index]};
     }
 
-    std::vector<std::vector<float>> getForceVectorColumn() {
-        std::vector<std::vector<float>> column = {};
+    std::vector<std::vector<double>> getForceVectorColumn() {
+        std::vector<std::vector<double>> column = {};
         for (int i = 0; i < fx_.size(); i++) {
             column.push_back(getForceVector(i));
         }
         return column;
     }
 
-    std::vector<std::vector<float>> getForceVectorWithTimeColumn() {
-        std::vector<std::vector<float>> column = {};
+    std::vector<std::vector<double>> getForceVectorWithTimeColumn() {
+        std::vector<std::vector<double>> column = {};
         for (int i = 0; i < fx_.size(); i++) {
             column.push_back(getForceWithTime(i));
         }
         return column;
     }
 
-    std::vector<std::vector<float>> getTorqueVectorColumn() {
-        std::vector<std::vector<float>> column = {};
+
+    std::vector<std::vector<double>> getTorqueVectorColumn() {
+        std::vector<std::vector<double>> column = {};
         for (int i = 0; i < fx_.size(); i++) {
             column.push_back(getForceVector(i));
         }
         return column;
     }
 
-    std::vector<std::vector<float>> getTorqueVectorWithTimeColumn() {
-        std::vector<std::vector<float>> column = {};
+    std::vector<std::vector<double>> getTorqueVectorWithTimeColumn() {
+        std::vector<std::vector<double>> column = {};
         for (int i = 0; i < fx_.size(); i++) {
             column.push_back(getForceWithTime(i));
         }
         return column;
     }
 
-    std::vector<float> getSingleTypeColumn_t_() {
+    std::vector<double> getSingleTypeColumn_t_() {
         return t_;
     }
 
-    std::vector<float> getSingleTypeColumn_fx_() {
+    std::vector<double> getSingleTypeColumn_fx_() {
         return fx_;
     }
 
-    std::vector<float> getSingleTypeColumn_fy_() {
+    std::vector<double> getSingleTypeColumn_fy_() {
         return fy_;
     }
 
-    std::vector<float> getSingleTypeColumn_fz_() {
+    std::vector<double> getSingleTypeColumn_fz_() {
         return fz_;
     }
 
-    std::vector<float> getSingleTypeColumn_tx_() {
+    std::vector<double> getSingleTypeColumn_tx_() {
         return tx_;
     }
 
-    std::vector<float> getSingleTypeColumn_ty_() {
+    std::vector<double> getSingleTypeColumn_ty_() {
         return ty_;
     }
 
-    std::vector<float> getSingleTypeColumn_tz_() {
+    std::vector<double> getSingleTypeColumn_tz_() {
         return tz_;
     }
 
 private:
-    std::vector<float> t_;
-    std::vector<float> fx_;
-    std::vector<float> fy_;
-    std::vector<float> fz_;
-    std::vector<float> tx_;
-    std::vector<float> ty_;
-    std::vector<float> tz_;
+    std::vector<double> t_;
+    std::vector<double> fx_;
+    std::vector<double> fy_;
+    std::vector<double> fz_;
+    std::vector<double> tx_;
+    std::vector<double> ty_;
+    std::vector<double> tz_;
     std::vector<std::string> variableNames_;
-    std::vector<std::vector<float>> data_;
+    std::vector<std::vector<double>> data_;
 
 };
 
