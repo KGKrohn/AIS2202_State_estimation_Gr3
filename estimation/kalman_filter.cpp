@@ -69,7 +69,7 @@ int main()
 
 
     estimation::kalman_filter kf(x0, P0,m,r);//Initialize kalman filter
-    std::vector<double> Ta = kf.scale_time_array(ta, 8416.0);   // Phase shift to match the time of the other datasets
+    std::vector<double> Ta = kf.scale_time_array(ta, -8416.0);   // Phase shift to match the time of the other datasets
     std::vector<double> Tft = kf.scale_time_array(tft);                   // Normalize time array
     std::vector<double> Tr = kf.scale_time_array(tr);                     // Normalize time array
 
@@ -78,7 +78,7 @@ int main()
 
     // Define file path
     std::string file_path= "C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/estimation/include/";
-    std::string datafile = file_path + "3-Test6.csv"; // Define file name
+    std::string datafile = file_path + "3-Test61.csv"; // Define file name
 
     int ir = 0;
     int ia = 0;
