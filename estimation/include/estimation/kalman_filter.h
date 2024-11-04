@@ -18,14 +18,13 @@ namespace estimation {
 
         void update_static_variables(std::vector<float> SaSDa,
                                      std::vector<float> SfSDf,
-                                     std::vector<float> StSDt,
-                                     float SDK) {
+                                     std::vector<float> StSDt) {
             SaSDa_ = SaSDa;
             SfSDf_ = SfSDf;
             StSDt_ = StSDt;
-            Q_calc(SDK);
             B_calc();
             U<< 0,0,0;
+            prev_t = 0;
         }
 
         bool write_state_to_csv(const std::string& filename, bool append = true, float t=0.0){
@@ -63,18 +62,20 @@ namespace estimation {
             return true;
         }
 
-        void Q_calc(float SDk) {
+        void Q_calc(float SDk, float t) {
             Eigen::MatrixXd Q_(9,9);
-            Q_ << 1, 0, 0, 0, 0, 0, 0, 0, 0,
-                  0, 1, 0, 0, 0, 0, 0, 0, 0,
-                  0, 0, 1, 0, 0, 0, 0, 0, 0,
-                  0, 0, 0, m_, 0, 0, 0, 0, 0,
-                  0, 0, 0, 0, m_, 0, 0, 0, 0,
-                  0, 0, 0, 0, 0, m_, 0, 0, 0,
-                  0, 0, 0, 0, 0, 0, m_*abs(r_(0,0)), 0, 0,
-                  0, 0, 0, 0, 0, 0, 0, m_*abs(r_(1,0)), 0,
-                  0, 0, 0, 0, 0, 0, 0, 0, m_*abs(r_(2,0));
-            Q = Q_* SDk;
+            Q_ << SDk, 0, 0, 0, 0, 0, 0, 0, 0,
+                  0,SDk, 0, 0, 0, 0, 0, 0, 0,
+                  0, 0, SDk, 0, 0, 0, 0, 0, 0,
+                  0, 0, 0, m_*SDk, 0, 0, 0, 0, 0,
+                  0, 0, 0, 0, m_*SDk, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0, m_*SDk, 0, 0, 0,
+                  0, 0, 0, 0, 0, 0, m_*abs(r_(0,0))*SDk, 0, 0,
+                  0, 0, 0, 0, 0, 0, 0, m_*abs(r_(1,0))*SDk, 0,
+                  0, 0, 0, 0, 0, 0, 0, 0, m_*abs(r_(2,0))*SDk;
+            float d_t = (t-prev_t)*0.001;
+            Q = d_t*Q_;
+            prev_t = t;
         }
 
         Eigen::MatrixXd rs_sqew_matrix() {
@@ -109,6 +110,26 @@ namespace estimation {
             return Hf;
         }
 
+        Eigen::MatrixXd Ha_matrix() {
+            Eigen::MatrixXd Ha(3,9);
+            Ha <<   1, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 1, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 1, 0, 0, 0, 0, 0, 0;
+            return Ha;
+        }
+
+        Eigen::MatrixXd Hc_matrix() {
+            Eigen::MatrixXd Hc(6,9);
+            Eigen::MatrixXd rs_sqew = rs_sqew_matrix()*-m_;
+            Hc <<   -m_*1, 0, 0, 1, 0, 0, 0, 0, 0,
+                    0, -m_*1, 0, 0, 1, 0, 0, 0, 0,
+                    0, 0, -m_*1, 0, 0, 1, 0, 0, 0,
+                    rs_sqew(0,0), rs_sqew(0,1), rs_sqew(0,2), 0, 0, 0, 1, 0, 0,
+                    rs_sqew(1,0), rs_sqew(1,1), rs_sqew(1,2), 0, 0, 0, 0, 1, 0,
+                    rs_sqew(2,0), rs_sqew(2,1), rs_sqew(2,2), 0, 0, 0, 0, 0, 1;
+            return Hc;
+        }
+
         Eigen::MatrixXd Rf_matrix() {
             Eigen::MatrixXd Rf(6,6);
             Rf <<   SfSDf_[0], 0, 0, 0, 0, 0,
@@ -128,14 +149,6 @@ namespace estimation {
             return Ra;
         }
 
-        Eigen::MatrixXd Ha_matrix() {
-            Eigen::MatrixXd Ha(3,9);
-            Ha <<   1, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 1, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 1, 0, 0, 0, 0, 0, 0;
-            return Ha;
-        }
-
         std::vector<double> scale_time_array(std::vector<double> time_array, float phase_shift = 0.0) {
             double start = time_array.front();
             for (int i = 0; i < time_array.size(); i++)
@@ -151,15 +164,6 @@ namespace estimation {
                     r31, r32, r33;
         }
 
-        void uk(float ax,float ay,float az, float fr, float ff, float fa) {
-            Eigen::MatrixXd gw(3,1);
-            gw << ax,ay,az;
-            Eigen::MatrixXd gs  = Rws_.transpose()*gw;
-
-            U = (gs - g_) * (fr / (ff - fa));
-            g_ = gs;
-        }
-
         void zc_update(float ax,float ay, float az, float fx, float fy, float fz, float tx, float ty, float tz) {
             Eigen::MatrixXd x(9,1);
             x << ax, ay, az, fx, fy, fz, tx, ty, tz;
@@ -171,7 +175,7 @@ namespace estimation {
                     -m_*rs_sqew(0,0), -m_*rs_sqew(0,1), -m_*rs_sqew(0,2), 0, 0, 0, 1, 0, 0,
                     -m_*rs_sqew(1,0), -m_*rs_sqew(1,1), -m_*rs_sqew(1,2), 0, 0, 0, 0, 1, 0,
                     -m_*rs_sqew(2,0), -m_*rs_sqew(2,1), -m_*rs_sqew(2,2), 0, 0, 0, 0, 0, 1;
-            H_ = Hf_matrix();
+            H_ = Hc_matrix();
             Z_ = Z*x;
             R_ = Rf_matrix();
         }
@@ -192,9 +196,19 @@ namespace estimation {
             R_ = Ra_matrix();
         }
 
-        void predict() {
-            Eigen::MatrixXd A = Eigen::MatrixXd::Identity(9, 9);
+        void uk(float fr, float ff, float fa) {
+            Eigen::MatrixXd gw(3,1);
+            gw << 0,0,-9.81;
+            Eigen::MatrixXd gs  = Rws_.transpose()*gw;
 
+            U = (gs - g_) * (fr / (ff - fa));
+            g_ = gs;
+        }
+
+        void predict(float SKD, float t) {
+            Q_calc(SKD,t);
+
+            Eigen::MatrixXd A = Eigen::MatrixXd::Identity(9, 9);
             x_ = A * x_ + B*U;
             P_ = A * P_ * A.transpose() + Q;
         }
@@ -232,6 +246,7 @@ namespace estimation {
         std::vector<float> SaSDa_;
         std::vector<float> SfSDf_;
         std::vector<float> StSDt_;
+        float prev_t;
     };
 }
 
