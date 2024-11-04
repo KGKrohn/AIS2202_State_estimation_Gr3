@@ -63,7 +63,6 @@ namespace estimation {
             return true;
         }
 
-
         void Q_calc(float SDk) {
             Eigen::MatrixXd Q_(9,9);
             Q_ << 1, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -137,11 +136,11 @@ namespace estimation {
             return Ha;
         }
 
-        std::vector<double> scale_time_array(std::vector<double> time_array) {
+        std::vector<double> scale_time_array(std::vector<double> time_array, float phase_shift = 0.0) {
             double start = time_array.front();
             for (int i = 0; i < time_array.size(); i++)
             {
-                time_array[i] = time_array[i]- start;
+                time_array[i] = time_array[i]- start + phase_shift;
             }
             return time_array;
         }
@@ -161,7 +160,9 @@ namespace estimation {
             g_ = gs;
         }
 
-        Eigen::MatrixXd Zc_matrix(Eigen::MatrixXd Xest) {
+        void zc_update(float ax,float ay, float az, float fx, float fy, float fz, float tx, float ty, float tz) {
+            Eigen::MatrixXd x(9,1);
+            x << ax, ay, az, fx, fy, fz, tx, ty, tz;
             Eigen::MatrixXd rs_sqew = rs_sqew_matrix();
             Eigen::MatrixXd Z(6,9);
             Z << -m_, 0, 0, 1, 0, 0, 0, 0, 0,
@@ -170,8 +171,9 @@ namespace estimation {
                     -m_*rs_sqew(0,0), -m_*rs_sqew(0,1), -m_*rs_sqew(0,2), 0, 0, 0, 1, 0, 0,
                     -m_*rs_sqew(1,0), -m_*rs_sqew(1,1), -m_*rs_sqew(1,2), 0, 0, 0, 0, 1, 0,
                     -m_*rs_sqew(2,0), -m_*rs_sqew(2,1), -m_*rs_sqew(2,2), 0, 0, 0, 0, 0, 1;
-            Eigen::MatrixXd Zc = Z*Xest;
-            return Zc;
+            H_ = Hf_matrix();
+            Z_ = Z*x;
+            R_ = Rf_matrix();
         }
 
         void  zf_update(float ax,float ay, float az, float fx, float fy, float fz, float tx, float ty, float tz) {
@@ -196,8 +198,6 @@ namespace estimation {
             x_ = A * x_ + B*U;
             P_ = A * P_ * A.transpose() + Q;
         }
-        
-
 
         void update() {
             K_ = (P_ * H_.transpose()) * (H_ * P_ * H_.transpose() + R_).inverse();
@@ -213,8 +213,6 @@ namespace estimation {
         Eigen::MatrixXd get_covariance() const {
             return P_;
         }
-
-
 
     private:
         std::vector<std::string> state_variable_names;
