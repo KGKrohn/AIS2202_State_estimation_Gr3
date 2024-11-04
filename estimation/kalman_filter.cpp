@@ -69,7 +69,7 @@ int main()
 
 
     estimation::kalman_filter kf(x0, P0,m,r);//Initialize kalman filter
-    std::vector<double> Ta = kf.scale_time_array(ta, -8416.0);   // Phase shift to match the time of the other datasets
+    std::vector<double> Ta = kf.scale_time_array(ta, 8416.0);   // Phase shift to match the time of the other datasets
     std::vector<double> Tft = kf.scale_time_array(tft);                   // Normalize time array
     std::vector<double> Tr = kf.scale_time_array(tr);                     // Normalize time array
 
