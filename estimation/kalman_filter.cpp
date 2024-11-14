@@ -79,13 +79,34 @@ int main()
 
     // Define file path
     std::string file_path= "C:/Skulemappe/NTNU_2022-2025/5_Semester2023/AIS2202_Kubernetikk/Modul_2_State estimation/AIS2202_State_estimation_Gr3/estimation/include/";
-    std::string datafile = file_path + "1-torque.csv"; // Define file name
-    //std::string datafile_z = file_path + "2-Zc_force.csv"; // Define file name
-    int ir = 0;
-    int ia = 0;
-    int ift = 0;
+    std::string datafile = file_path + "1-FTS_unbias.csv"; // Define file name
+    std::string datafile_z = file_path + "1-Zc_unbias.csv"; // Define file name
+    int ir = 1;
+    int ia = 1;
+    int ift = 1;
+    Eigen::MatrixXd R_fa(3,3);
+    R_fa << 0, -1, 0,
+            0, 0, 1,
+            -1, 0, 0;
+    Eigen::MatrixXd a(3,1);
+
+    kf.Rws(r11[0],r12[0],r13[0],
+           r21[0],r22[0],r23[0],
+           r31[0],r32[0],r33[0]);
+    kf.uk(fr, ff, fa);
+
+    a << ax[ia]-IMUb(0), ay[ia]-IMUb(1), az[ia]-IMUb(2);
+    Eigen::MatrixXd a_new = R_fa*a;
+    float ax_f =a_new(0);
+    float ay_f =a_new(1);
+    float az_f =a_new(2);
+    kf.zf_update(ax_f, ay_f, az_f,
+                 fx[0]-Fb(0), fy[0]-Fb(1), fz[0]-Fb(2),
+                 tx[0]-Tb(0), ty[0]-Tb(1), tz[0]-Tb(2));
+    kf.predict(SDk,0);
+    kf.update();
     kf.write_state_to_csv(datafile,false); // Write header to file
-    //kf.write_z_to_csv(datafile_z,false); // Write header to file
+    kf.write_z_to_csv(datafile_z,false); // Write header to file
     for (int i = 0; i < Tr.back(); i++)
     {
         if (Tr[ir] == i)
@@ -94,36 +115,41 @@ int main()
                    r21[ir],r22[ir],r23[ir],
                    r31[ir],r32[ir],r33[ir]);
             kf.uk(fr, ff, fa);
-
             ir = ir + 1;
         }
         if (Ta[ia] == i)
         {
-            kf.za_update(ax[ia], ay[ia], az[ia],
-                         fx[ift], fy[ift], fz[ift],
-                         tx[ift], ty[ift], tz[ift]);
-            kf.zc_make(ax[ia], ay[ia], az[ia],
-                         fx[ift], fy[ift], fz[ift],
-                         tx[ift], ty[ift], tz[ift]);
-
+            a << ax[ia]-IMUb(0), ay[ia]-IMUb(1), az[ia]-IMUb(2);
+            Eigen::MatrixXd a_new = R_fa*a;
+            float ax_f =a_new(0);
+            float ay_f =a_new(1);
+            float az_f =a_new(2);
+            kf.za_update(ax_f, ay_f, az_f,
+                         fx[ift]-Fb(0), fy[ift]-Fb(1), fz[ift]-Fb(2),
+                         tx[ift]-Tb(0), ty[ift]-Tb(1), tz[ift]-Tb(2));
             kf.predict(SDk,i);
             kf.update();
+            kf.zc_make();
             kf.write_state_to_csv(datafile,true,i);// IMU kalmanfilter output
-            //kf.write_z_to_csv(datafile_z,true,i);// IMU kalmanfilter output
+            kf.write_z_to_csv(datafile_z,true,i);// IMU kalmanfilter output
             ia = ia + 1;
         }
         if (Tft[ift] == i)
         {
-            kf.zf_update(ax[ia], ay[ia], az[ia],
-                         fx[ift], fy[ift], fz[ift],
-                         tx[ift], ty[ift], tz[ift]);
-            kf.zc_make(ax[ia], ay[ia], az[ia],
-                         fx[ift], fy[ift], fz[ift],
-                         tx[ift], ty[ift], tz[ift]);
+            a << ax[ia]-IMUb(0), ay[ia]-IMUb(1), az[ia]-IMUb(2);
+            Eigen::MatrixXd a_new = R_fa*a;
+            float ax_f =a_new(0);
+            float ay_f =a_new(1);
+            float az_f =a_new(2);
+            kf.zf_update(ax_f, ay_f, az_f,
+                         fx[ift]-Fb(0), fy[ift]-Fb(1), fz[ift]-Fb(2),
+                         tx[ift]-Tb(0), ty[ift]-Tb(1), tz[ift]-Tb(2));
+
             kf.predict(SDk,i);
             kf.update();
+            kf.zc_make();
             kf.write_state_to_csv(datafile,true,i);// FTS kalmanfilter output
-            //kf.write_z_to_csv(datafile_z,true,i);// IMU kalmanfilter output
+            kf.write_z_to_csv(datafile_z,true,i);// IMU kalmanfilter output
 
             ift = ift + 1;
         }
