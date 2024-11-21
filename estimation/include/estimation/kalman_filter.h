@@ -97,18 +97,17 @@ namespace estimation {
         }
 
         void Q_calc(float SDk, double t) {
-            double d_t = abs((t-prev_t)*0.00001);//0.000001 for torque and 0.001 for force
-            double d_t_2 = abs((t-prev_t)*0.001);//0.000001 for torque and 0.001 for force
+            double d_t = abs((t-prev_t)*0.000001);// 0.001 for torque and 0.000001 for force
             Eigen::MatrixXd Q_(9,9);
             Q_ << SDk*d_t, 0, 0, 0, 0, 0, 0, 0, 0,
-                  0,SDk*d_t, 0, 0, 0, 0, 0, 0, 0,
+                  0, SDk*d_t, 0, 0, 0, 0, 0, 0, 0,
                   0, 0, SDk*d_t, 0, 0, 0, 0, 0, 0,
                   0, 0, 0, m_*SDk*d_t, 0, 0, 0, 0, 0,
                   0, 0, 0, 0, m_*SDk*d_t, 0, 0, 0, 0,
                   0, 0, 0, 0, 0, m_*SDk*d_t, 0, 0, 0,
-                  0, 0, 0, 0, 0, 0, m_*abs(r_(0,0))*SDk*d_t_2, 0, 0,
-                  0, 0, 0, 0, 0, 0, 0, m_*abs(r_(1,0))*SDk*d_t_2, 0,
-                  0, 0, 0, 0, 0, 0, 0, 0, m_*abs(r_(2,0))*SDk*d_t_2;
+                  0, 0, 0, 0, 0, 0, m_*abs(r_(0,0))*SDk*d_t, 0, 0,
+                  0, 0, 0, 0, 0, 0, 0, m_*abs(r_(1,0))*SDk*d_t, 0,
+                  0, 0, 0, 0, 0, 0, 0, 0, m_*abs(r_(2,0))*SDk*d_t;
 
             Q = Q_;
             prev_t = t;
@@ -194,7 +193,6 @@ namespace estimation {
                     -1, 0, 0;
             Rws_ = R_fa*R;
         }
-
 
         void zc_make() {
             Eigen::MatrixXd rs_sqew = rs_sqew_matrix();
